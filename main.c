@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "print_ncurses.h"
 
-void	print_ncurses(unsigned char *tab, int i);
+void	print_ncurses(unsigned char *tab);
 
 int		main()
 {
@@ -27,7 +27,7 @@ int		main()
 		{
 			tab[i] = (unsigned char)rand() % 255;
 		}
-		print_ncurses(tab, -1);
+		print_ncurses(tab);
 	}
 	return 0;
 }
