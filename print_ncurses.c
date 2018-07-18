@@ -12,35 +12,6 @@
 
 #include "print_ncurses.h"
 
-static void	print_canvas(int x, int y)
-{
-	start_color();
-	init_color(COLOR_GREY, 500, 500, 500);
-	init_pair(1, COLOR_GREY, COLOR_GREY);
-	attron(COLOR_PAIR(1) | A_BOLD);
-	while (y++ < 5)
-	{
-		x = 0;
-		while (x < 194)
-			mvprintw(y, x++, "*");
-	}
-	y--;
-	while (y++ < 73)
-	{
-		mvprintw(y, 0, "*");
-		mvprintw(y, 193, "*");
-	}
-	x = 0;
-	while (x < 194)
-		mvprintw(y, x++, "*");
-	init_pair(2, COLOR_WHITE, COLOR_GREY);
-	attron(COLOR_PAIR(2));
-	mvprintw(3, 100, "COREWAR!");
-	mvprintw(4, 89, "by averemiy, mshkliai, itiievsk");
-	attron(COLOR_PAIR(init_pair(3, COLOR_MAGENTA, COLOR_GREY) + 2));
-	attroff(COLOR_PAIR(3) | A_BOLD);
-}
-
 static void	to_buffer(unsigned char *tab)
 {
 	int i;
@@ -48,29 +19,32 @@ static void	to_buffer(unsigned char *tab)
 	int y;
 
 	i = 0;
-	y = 7;
+	y = 9;
+	attrset(A_DIM);
 	while (i < 4096)
 	{
-		x = 3;
-		while (x < 192)
+		x = 4;
+		while (x < 195)
 		{
 			mvprintw(y, x, "%.2X ", tab[i++]);
 			x += 3;
 		}
-		mvprintw(y, x - 1, "\n");
 		y++;
 	}
+	attroff(A_DIM);
 }
 
 void		print_ncurses(unsigned char *tab)
 {
+	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
 	curs_set(0);
 	cbreak();
 	noecho();
-	to_buffer(tab);
 	print_canvas(0, 0);
+	to_buffer(tab);
 	refresh();
+//	usleep ( 500000 );
 	getch();
 	endwin();
 }
