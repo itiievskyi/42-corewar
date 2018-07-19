@@ -34,7 +34,7 @@ static void	check_pause(int i, int pause, char ch)
 			ch = getch();
 		ch = '\0';
 	}
-	if (i == 49 && !(mvaddstr(65, 213, "The game is over...    ")) &&
+	if (i == 49 && !(mvaddstr(65, 202, "The game is over...    ")) &&
 		!(attron(COLOR_PAIR(7) | A_BOLD)) &&
 		!(mvaddstr(67, 202, "Press 'q' to quit the game         ")))
 		while (ch != 'q')

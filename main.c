@@ -21,9 +21,22 @@ int		main()
 	int				step;
 
 	step = 0;
+	ft_bzero(tab, 4096);
 	while (step++ < 50)
 	{
-		for( i = 0 ; i < 4096 ; i++ )
+		for( i = 0 ; i < 325 ; i++ )
+		{
+			tab[i] = (unsigned char)rand() % 255;
+		}
+		for( i = 1024 ; i < 1500 ; i++ )
+		{
+			tab[i] = (unsigned char)rand() % 255;
+		}
+		for( i = 2048 ; i < 2373 ; i++ )
+		{
+			tab[i] = (unsigned char)rand() % 255;
+		}
+		for( i = 3072 ; i < 3600 ; i++ )
 		{
 			tab[i] = (unsigned char)rand() % 255;
 		}
