@@ -21,7 +21,7 @@ int		main()
 	int				step;
 
 	step = 0;
-	while (step++ < 10)
+	while (step++ < 50)
 	{
 		for( i = 0 ; i < 4096 ; i++ )
 		{
