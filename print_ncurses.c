@@ -12,13 +12,12 @@
 
 #include "print_ncurses.h"
 
-static void	check_pause(int i, int pause)
+static void	check_pause(int i, int pause, char ch)
 {
-	char ch;
-
-	ch = '\0';
-	attron(COLOR_PAIR(5));
-	mvaddstr(65, 208, "The game is running...");
+	attron(COLOR_PAIR(7) | A_BOLD);
+	mvaddstr(67, 202, "Press SPACE to pause the game ");
+	attron(COLOR_PAIR(5) | A_BOLD);
+	mvaddstr(65, 202, "The game is running...");
 	if (pause == 0)
 	{
 		halfdelay( 1 );
@@ -28,15 +27,18 @@ static void	check_pause(int i, int pause)
 	}
 	if (i == 0 || pause)
 	{
+		mvaddstr(65, 202, "The game is paused... ");
+		attron(COLOR_PAIR(7) | A_BOLD);
+		mvaddstr(67, 202, "Press SPACE to resume the game");
 		while (ch != ' ')
 			ch = getch();
 		ch = '\0';
 	}
-	if (i == 49)
-	{
+	if (i == 49 && !(mvaddstr(65, 213, "The game is over...    ")) &&
+		!(attron(COLOR_PAIR(7) | A_BOLD)) &&
+		!(mvaddstr(67, 202, "Press 'q' to quit the game         ")))
 		while (ch != 'q')
 			ch = getch();
-	}
 }
 
 static void	to_buffer(unsigned char *tab)
@@ -67,13 +69,26 @@ void		print_ncurses(unsigned char *tab)
 
 	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
+	start_color();
+	init_colors();
 	curs_set(0);
 	cbreak();
 	noecho();
 	print_canvas(0, 0);
 	to_buffer(tab);
 	refresh();
-	check_pause(i++, 0);
+	check_pause(i++, 0, '\0');
 	usleep ( 200000 );
 	endwin();
+}
+
+void		init_colors(void)
+{
+	init_color(COLOR_GREY, 500, 500, 500);
+	init_pair(1, COLOR_GREY, COLOR_GREY);
+	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(5, COLOR_WHITE, COLOR_BLACK);
+	init_pair(6, COLOR_GREEN, COLOR_BLACK);
+	init_pair(7, COLOR_RED, COLOR_BLACK);
+	attroff(A_DIM);
 }

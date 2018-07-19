@@ -28,5 +28,6 @@ typedef struct		s_ncurse
 	unsigned char	*tab;
 }					t_ncurse;
 void				print_ncurses(unsigned char *tab);
+void				init_colors(void);
 void				print_canvas(int x, int y);
 #endif

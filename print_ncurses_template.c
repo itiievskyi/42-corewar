@@ -37,14 +37,12 @@ static void	print_team(void)
 	mvaddstr(3 + 56, 207 + 5, "| |_| |  _| | |   | |_) |");
 	mvaddstr(4 + 56, 207 + 5, "|  _  | |___| |___|  __/ ");
 	mvaddstr(5 + 56, 207 + 5, "|_| |_|_____|_____|_|    ");
+	mvaddstr(69, 202, "Press CTRL+C to exit at any time");
 	attroff(COLOR_PAIR(7) | A_BOLD);
 }
 
 static void	print_header(void)
 {
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(6, COLOR_GREEN, COLOR_BLACK);
-	init_pair(7, COLOR_RED, COLOR_BLACK);
 	attron(COLOR_PAIR(4));
 	mvprintw(1, 22, "%S",
 	L" ██████╗ ██████╗ ██████╗ ███████╗██╗    ██╗ █████╗ ██████╗ ");
@@ -58,21 +56,18 @@ static void	print_header(void)
 	L"╚██████╗╚██████╔╝██║  ██║███████╗╚███╔███╔╝██║  ██║██║  ██║");
 	mvprintw(6, 22, "%S",
 	L" ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝");
-	init_pair(5, COLOR_WHITE, COLOR_BLACK);
 	attron(COLOR_PAIR(5) | A_BOLD);
 	mvprintw(3, 88, "%s", "┌┐ ┬ ┬");
 	mvprintw(4, 88, "%s", "├┴┐└┬┘");
 	mvprintw(5, 88, "%s", "└─┘ ┴ ");
+	mvaddstr(71, 202, "The project is prepared for 42School's project");
+	mvaddstr(72, 202, "COREWAR in 2018. All rights reserved, cheaters");
 	attroff(COLOR_PAIR(5) | A_BOLD);
 	print_team();
 }
 
 void		print_canvas(int x, int y)
 {
-	start_color();
-	init_pair(5, COLOR_WHITE, COLOR_BLACK);
-	init_color(COLOR_GREY, 500, 500, 500);
-	init_pair(1, COLOR_GREY, COLOR_GREY);
 	attron(COLOR_PAIR(1) | A_BOLD);
 	while (x < 252)
 		mvprintw(y, x++, "*");
