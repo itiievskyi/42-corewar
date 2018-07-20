@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <locale.h>
 # include "./libft/libft.h"
+# include "op.h"
 
 # define COLOR_GREY 8
 
@@ -25,9 +26,12 @@ typedef struct		s_ncurse
 {
 	int				win;
 	int				players;
-	unsigned char	*tab;
+	int				step;
+	int				proc;
+//	unsigned char	*tab;
+	char			**names;
 }					t_ncurse;
-void				print_ncurses(unsigned char *tab);
+void				print_ncurses(unsigned char *tab, t_ncurse *crwr);
 void				init_colors(void);
-void				print_canvas(int x, int y);
+void				print_template(int x, int y, t_ncurse *crwr);
 #endif

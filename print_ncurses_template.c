@@ -66,7 +66,48 @@ static void	print_header(void)
 	print_team();
 }
 
-void		print_canvas(int x, int y)
+static void	print_players(t_ncurse *crwr, int i, int len)
+{
+	attron(COLOR_PAIR(5) | A_BOLD);
+	mvaddstr(9, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗   ╗");
+	mvaddstr(10, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ║");
+	mvaddstr(11, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═   ╩");
+	mvaddstr(9 + 6 * 1, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
+	mvaddstr(10 + 6 * 1, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╔═╝");
+	mvaddstr(11 + 6 * 1, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
+	mvaddstr(9 + 6 * 2, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
+	mvaddstr(10 + 6 * 2, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ═╣");
+	mvaddstr(11 + 6 * 2, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
+	mvaddstr(9 + 6 * 3, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╦ ╦");
+	mvaddstr(10 + 6 * 3, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╚═╣");
+	mvaddstr(11 + 6 * 3, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═    ╩");
+	attroff(COLOR_PAIR(5) | A_BOLD);
+	while (++i < 4)
+	{
+		if (crwr->players > i && (len = ft_strlen(crwr->names[i])))
+		{
+			attron(COLOR_PAIR(10 * (i + 1)) | A_BOLD);
+			mvprintw(13 + i * 6, 200 + ((50 - len) / 2), "%s", crwr->names[i]);
+			attroff(COLOR_PAIR(10 * (i + 1)) | A_BOLD);
+		}
+		else
+			mvprintw(13 + i * 6, 202, "Player was not set :(");
+	}
+}
+
+void		print_misc(void)
+{
+	attron(COLOR_PAIR(5) | A_BOLD);
+	mvaddstr(39, 202, "Cycle : ");
+	mvaddstr(39, 227, "Processes : ");
+	mvprintw(41, 202, "CYCLE_TO_DIE : %d", CYCLE_TO_DIE);
+	mvprintw(41, 227, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvprintw(43, 202, "NBR_LIVE : %d", NBR_LIVE);
+	mvprintw(43, 227, "MAX_CHECKS : %d", MAX_CHECKS);
+	attroff(COLOR_PAIR(5) | A_BOLD);
+}
+
+void		print_template(int x, int y, t_ncurse *crwr)
 {
 	attron(COLOR_PAIR(1) | A_BOLD);
 	while (x < 252)
@@ -79,7 +120,7 @@ void		print_canvas(int x, int y)
 		mvprintw(y, 0, "*");
 		mvprintw(y, 198, "*");
 		mvprintw(y, 251, "*");
-		if ((y == 56 || y == 63) && (x = 198))
+		if ((y == 56 || y == 63 || y == 37) && (x = 198))
 			while (x < 252)
 				mvprintw(y, x++, "*");
 	}
@@ -87,5 +128,6 @@ void		print_canvas(int x, int y)
 	while (x < 252)
 		mvprintw(y, x++, "*");
 	print_header();
-	attroff(COLOR_PAIR(1) | A_BOLD);
+	print_players(crwr, -1, 0);
+	print_misc();
 }

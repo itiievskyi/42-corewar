@@ -12,7 +12,30 @@
 
 #include "print_ncurses.h"
 
-static void	check_pause(int i, int pause, char ch)
+static void	print_finish(t_ncurse *crwr, int i)
+{
+	while (i++ < 1000)
+	{
+		i % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
+			attron(COLOR_PAIR(5) | A_BOLD);
+		usleep ( 2000 );
+		mvaddstr(9, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗   ╗");
+		mvaddstr(10, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ║");
+		mvaddstr(11, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═   ╩");
+		mvaddstr(9 + 6 * 1, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
+		mvaddstr(10 + 6 * 1, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╔═╝");
+		mvaddstr(11 + 6 * 1, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
+		mvaddstr(9 + 6 * 2, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
+		mvaddstr(10 + 6 * 2, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ═╣");
+		mvaddstr(11 + 6 * 2, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
+		mvaddstr(9 + 6 * 3, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╦ ╦");
+		mvaddstr(10 + 6 * 3, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╚═╣");
+		mvaddstr(11 + 6 * 3, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═    ╩");
+		attroff(COLOR_PAIR(10 * (crwr->win + 1)) | COLOR_PAIR(5) | A_BOLD);
+	}
+}
+
+static void	check_pause(t_ncurse *crwr, int pause, char ch)
 {
 	attron(COLOR_PAIR(7) | A_BOLD);
 	mvaddstr(67, 202, "Press SPACE to pause the game ");
@@ -25,23 +48,22 @@ static void	check_pause(int i, int pause, char ch)
 			pause = 1;
 		ch = '\0';
 	}
-	if (i == 0 || pause)
+	if ((!crwr->step || pause) && !mvaddstr(65, 202, "The game is paused... "))
 	{
-		mvaddstr(65, 202, "The game is paused... ");
 		attron(COLOR_PAIR(7) | A_BOLD);
 		mvaddstr(67, 202, "Press SPACE to resume the game");
 		while (ch != ' ')
 			ch = getch();
 		ch = '\0';
 	}
-	if (i == 49 && !(mvaddstr(65, 202, "The game is over...    ")) &&
+	if (crwr->win != 0 && !(mvaddstr(65, 202, "The game is over...    ")) &&
 		!(attron(COLOR_PAIR(7) | A_BOLD)) &&
 		!(mvaddstr(67, 202, "Press 'q' to quit the game         ")))
 		while (ch != 'q')
 			ch = getch();
 }
 
-static void	to_buffer(unsigned char *tab)
+static void	to_buffer(unsigned char *tab, t_ncurse *crwr)
 {
 	int i;
 	int x;
@@ -49,8 +71,7 @@ static void	to_buffer(unsigned char *tab)
 
 	i = 0;
 	y = 9;
-	attrset(A_DIM);
-	while (i < 4096)
+	while (i < 4096 && crwr)
 	{
 		x = 4;
 		while (x < 195)
@@ -60,13 +81,10 @@ static void	to_buffer(unsigned char *tab)
 		}
 		y++;
 	}
-	attroff(A_DIM);
 }
 
-void		print_ncurses(unsigned char *tab)
+void		print_ncurses(unsigned char *tab, t_ncurse *crwr)
 {
-	static int	i;
-
 	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
 	start_color();
@@ -74,21 +92,13 @@ void		print_ncurses(unsigned char *tab)
 	curs_set(0);
 	cbreak();
 	noecho();
-	print_canvas(0, 0);
-	to_buffer(tab);
+	if (crwr->step == 0)
+		print_template(0, 0, crwr);
+	to_buffer(tab, crwr);
+	if (crwr->win > 0)
+		print_finish(crwr, 0);
 	refresh();
-	check_pause(i++, 0, '\0');
+	check_pause(crwr, 0, '\0');
 	usleep ( 200000 );
 	endwin();
-}
-
-void		init_colors(void)
-{
-	init_color(COLOR_GREY, 500, 500, 500);
-	init_pair(1, COLOR_GREY, COLOR_GREY);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(5, COLOR_WHITE, COLOR_BLACK);
-	init_pair(6, COLOR_GREEN, COLOR_BLACK);
-	init_pair(7, COLOR_RED, COLOR_BLACK);
-	attroff(A_DIM);
 }
