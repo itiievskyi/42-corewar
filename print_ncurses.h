@@ -29,9 +29,12 @@ typedef struct		s_ncurse
 	int				step;
 	int				proc;
 	char			**names;
+	int				sizes[4];
+	unsigned char	*tab;
 }					t_ncurse;
-void				print_ncurses(unsigned char *tab, t_ncurse *crwr);
+void				print_ncurses(t_ncurse *crwr);
 void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);
 void				print_finish(t_ncurse *crwr, int i);
+void				print_field_start(t_ncurse *crwr, int i, int y, int x);
 #endif

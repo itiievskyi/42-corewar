@@ -18,6 +18,7 @@ int		main()
 	static t_ncurse	*crwr;
 	unsigned char	tab[4096];
 	int				i;
+	int				p;
 
 	crwr = (t_ncurse*)malloc(sizeof(t_ncurse));
 	crwr->players = 4;
@@ -27,27 +28,26 @@ int		main()
 	crwr->names[2] = ft_strdup("Survivor");
 	crwr->names[3] = ft_strdup("jumper");
 	ft_bzero(tab, 4096);
+	crwr->sizes[0] = 325;
+	crwr->sizes[1] = 80;
+	crwr->sizes[2] = 680;
+	crwr->sizes[3] = 325;
+	crwr->tab = tab;
 	while (crwr->step < 50)
 	{
-		for( i = 0 ; i < 325 ; i++ )
+		p = 0;
+		while (p < crwr->players)
 		{
-			tab[i] = (unsigned char)rand() % 255;
-		}
-		for( i = 1024 ; i < 1500 ; i++ )
-		{
-			tab[i] = (unsigned char)rand() % 255;
-		}
-		for( i = 2048 ; i < 2373 ; i++ )
-		{
-			tab[i] = (unsigned char)rand() % 255;
-		}
-		for( i = 3072 ; i < 3600 ; i++ )
-		{
-			tab[i] = (unsigned char)rand() % 255;
+			for(i = 0 + (4096 / crwr->players) * p;
+				i < crwr->sizes[p] + ((4096 / crwr->players) * p); i++)
+			{
+				crwr->tab[i] = (unsigned char)rand() % 255;
+			}
+			p++;
 		}
 		if (crwr->step == 49)
 			crwr->win = time(NULL) % (crwr->players) + 1;
-		print_ncurses(tab, crwr);
+		print_ncurses(crwr);
 		(crwr->step)++;
 	}
 	return 0;

@@ -36,7 +36,7 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 	return (ch);
 }
 
-static void	to_buffer(unsigned char *tab, t_ncurse *crwr)
+static void	to_buffer(t_ncurse *crwr)
 {
 	int i;
 	int x;
@@ -44,19 +44,27 @@ static void	to_buffer(unsigned char *tab, t_ncurse *crwr)
 
 	i = 0;
 	y = 9;
+	attron(COLOR_PAIR(4) | A_BOLD);
+	mvprintw(39, 210, "%05d", crwr->step);
+	attroff(COLOR_PAIR(4) | A_BOLD);
+	if (crwr->step == 0)
+	{
+		print_field_start(crwr, 0, 9, 0);
+		return ;
+	}
 	while (i < 4096 && crwr)
 	{
 		x = 4;
 		while (x < 195)
 		{
-			mvprintw(y, x, "%.2X ", tab[i++]);
+			mvprintw(y, x, "%.2X ", crwr->tab[i++]);
 			x += 3;
 		}
 		y++;
 	}
 }
 
-void		print_ncurses(unsigned char *tab, t_ncurse *crwr)
+void		print_ncurses(t_ncurse *crwr)
 {
 	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
@@ -67,7 +75,7 @@ void		print_ncurses(unsigned char *tab, t_ncurse *crwr)
 	noecho();
 	if (crwr->step == 0)
 		print_template(0, 0, crwr);
-	to_buffer(tab, crwr);
+	to_buffer(crwr);
 	if (crwr->win > 0)
 		print_finish(crwr, 0);
 	refresh();
