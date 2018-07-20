@@ -25,5 +25,4 @@ void		init_colors(void)
 	init_pair(20, COLOR_GREEN, COLOR_BLACK);
 	init_pair(30, COLOR_CYAN, COLOR_BLACK);
 	init_pair(40, COLOR_YELLOW, COLOR_BLACK);
-	
 }

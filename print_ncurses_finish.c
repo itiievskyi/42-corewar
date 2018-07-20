@@ -51,7 +51,7 @@ void		print_finish(t_ncurse *crwr, int i)
 	attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD);
 	mvprintw(50, 200 + ((50 - ft_strlen(crwr->names[crwr->win - 1])) / 2),
 		"%s", crwr->names[crwr->win - 1]);
-	halfdelay( 1 );
+	halfdelay(1);
 	while (i++ < 10000 && ch != 'q')
 	{
 		i % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
@@ -59,7 +59,7 @@ void		print_finish(t_ncurse *crwr, int i)
 		refresh();
 		print_winner(crwr->win);
 		attroff(COLOR_PAIR(10 * (crwr->win)) | COLOR_PAIR(5) | A_BOLD);
-		usleep ( 100000 );
+		usleep(100000);
 		attron(COLOR_PAIR(7) | A_BOLD);
 		mvaddstr(67, 202, "Press 'q' to quit the game         ");
 		attron(COLOR_PAIR(5) | A_BOLD);

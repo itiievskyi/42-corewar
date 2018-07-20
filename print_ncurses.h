@@ -28,7 +28,6 @@ typedef struct		s_ncurse
 	int				players;
 	int				step;
 	int				proc;
-//	unsigned char	*tab;
 	char			**names;
 }					t_ncurse;
 void				print_ncurses(unsigned char *tab, t_ncurse *crwr);

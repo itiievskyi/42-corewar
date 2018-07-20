@@ -20,7 +20,7 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 	mvaddstr(65, 202, "The game is running...");
 	if (crwr->win == 0 && pause == 0)
 	{
-		halfdelay( 1 );
+		halfdelay(1);
 		if ((ch = getch()) == ' ')
 			pause = 1;
 		ch = '\0';
@@ -72,6 +72,6 @@ void		print_ncurses(unsigned char *tab, t_ncurse *crwr)
 		print_finish(crwr, 0);
 	refresh();
 	check_pause(crwr, 0, '\0');
-	usleep ( 200000 );
+	usleep(200000);
 	endwin();
 }
