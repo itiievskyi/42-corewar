@@ -34,4 +34,5 @@ typedef struct		s_ncurse
 void				print_ncurses(unsigned char *tab, t_ncurse *crwr);
 void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);
+void				print_finish(t_ncurse *crwr, int i);
 #endif

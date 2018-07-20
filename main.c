@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "print_ncurses.h"
+#include <time.h>
 
 int		main()
 {
@@ -45,7 +46,7 @@ int		main()
 			tab[i] = (unsigned char)rand() % 255;
 		}
 		if (crwr->step == 49)
-			crwr->win = 2;
+			crwr->win = time(NULL) % (crwr->players) + 1;
 		print_ncurses(tab, crwr);
 		(crwr->step)++;
 	}

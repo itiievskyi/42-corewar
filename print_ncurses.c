@@ -12,36 +12,13 @@
 
 #include "print_ncurses.h"
 
-static void	print_finish(t_ncurse *crwr, int i)
-{
-	while (i++ < 1000)
-	{
-		i % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
-			attron(COLOR_PAIR(5) | A_BOLD);
-		usleep ( 2000 );
-		mvaddstr(9, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗   ╗");
-		mvaddstr(10, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ║");
-		mvaddstr(11, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═   ╩");
-		mvaddstr(9 + 6 * 1, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
-		mvaddstr(10 + 6 * 1, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╔═╝");
-		mvaddstr(11 + 6 * 1, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
-		mvaddstr(9 + 6 * 2, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╔═╗");
-		mvaddstr(10 + 6 * 2, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝   ═╣");
-		mvaddstr(11 + 6 * 2, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═  ╚═╝");
-		mvaddstr(9 + 6 * 3, 202, "╔═╗╦  ╔═╗╦ ╦╔═╗╦═╗  ╦ ╦");
-		mvaddstr(10 + 6 * 3, 202, "╠═╝║  ╠═╣╚╦╝║╣ ╠╦╝  ╚═╣");
-		mvaddstr(11 + 6 * 3, 202, "╩  ╩═╝╩ ╩ ╩ ╚═╝╩╚═    ╩");
-		attroff(COLOR_PAIR(10 * (crwr->win + 1)) | COLOR_PAIR(5) | A_BOLD);
-	}
-}
-
-static void	check_pause(t_ncurse *crwr, int pause, char ch)
+static char	check_pause(t_ncurse *crwr, int pause, char ch)
 {
 	attron(COLOR_PAIR(7) | A_BOLD);
 	mvaddstr(67, 202, "Press SPACE to pause the game ");
 	attron(COLOR_PAIR(5) | A_BOLD);
 	mvaddstr(65, 202, "The game is running...");
-	if (pause == 0)
+	if (crwr->win == 0 && pause == 0)
 	{
 		halfdelay( 1 );
 		if ((ch = getch()) == ' ')
@@ -56,11 +33,7 @@ static void	check_pause(t_ncurse *crwr, int pause, char ch)
 			ch = getch();
 		ch = '\0';
 	}
-	if (crwr->win != 0 && !(mvaddstr(65, 202, "The game is over...    ")) &&
-		!(attron(COLOR_PAIR(7) | A_BOLD)) &&
-		!(mvaddstr(67, 202, "Press 'q' to quit the game         ")))
-		while (ch != 'q')
-			ch = getch();
+	return (ch);
 }
 
 static void	to_buffer(unsigned char *tab, t_ncurse *crwr)
