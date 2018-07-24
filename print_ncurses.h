@@ -37,4 +37,7 @@ void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);
 void				print_finish(t_ncurse *crwr, int i);
 void				print_field_start(t_ncurse *crwr, int i, int y, int x);
+void				print_help(void);
+void				print_music(t_ncurse *crwr);
+void				sighandler(int signum);
 #endif

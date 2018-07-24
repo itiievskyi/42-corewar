@@ -21,8 +21,10 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 	if (crwr->win == 0 && pause == 0)
 	{
 		halfdelay(1);
-		if ((ch = getch()) == ' ')
+		if ((ch = getch()) == ' ' || ch == 'h')
 			pause = 1;
+//		if (ch == 'h')
+//			print_help();
 		ch = '\0';
 	}
 	if ((!crwr->step || pause) && !mvaddstr(65, 202, "The game is paused... "))
@@ -66,6 +68,8 @@ static void	to_buffer(t_ncurse *crwr)
 
 void		print_ncurses(t_ncurse *crwr)
 {
+	if (!crwr->step)
+		print_music(crwr);
 	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
 	start_color();

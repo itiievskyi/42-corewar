@@ -26,3 +26,31 @@ void		init_colors(void)
 	init_pair(30, COLOR_CYAN, COLOR_BLACK);
 	init_pair(40, COLOR_YELLOW, COLOR_BLACK);
 }
+
+void		print_music(t_ncurse *crwr)
+{
+	if (!crwr->step)
+	{
+		system("#!/bin/sh\n\
+				if ! pkill -0 -x 'afplay' 2>/dev/null \
+				-o pkill -0 -x  'crwr' 2>/dev/null \n\
+				then\n\
+				afplay music.mp3 & \n\
+				fi");
+	}
+	else if (crwr->win)
+	{
+		system("#!/bin/sh\n\
+				pkill -9 'afplay'");
+	}
+}
+
+void		sighandler(int signum)
+{
+	WINDOW	*quit;
+
+	endwin();
+	system("pkill -9 'afplay'");
+	ft_printf("You have pressed Ctrl+C. Shame on you!");
+	exit(signum);
+}

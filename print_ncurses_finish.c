@@ -66,4 +66,5 @@ void		print_finish(t_ncurse *crwr, int i)
 		mvaddstr(65, 202, "The game is over...    ");
 		ch = getch();
 	}
+	print_music(crwr);
 }

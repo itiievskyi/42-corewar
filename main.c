@@ -35,6 +35,7 @@ int		main()
 	crwr->tab = tab;
 	while (crwr->step < 50)
 	{
+		signal(SIGINT, sighandler);
 		p = 0;
 		while (p < crwr->players)
 		{
