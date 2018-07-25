@@ -33,13 +33,13 @@ typedef struct		s_ncurse
 	int				players;
 	int				step;
 	int				proc;
+	int				pause;
+	int				help;
+	int				quit;
 	char			**names;
 	int				sizes[4];
 	unsigned char	*tab;
 }					t_ncurse;
-typedef struct		s_panel_data {
-	int				hide;
-}					t_panel_data;
 void				print_ncurses(t_ncurse *crwr);
 void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);

@@ -67,24 +67,19 @@ static void	init_win(WINDOW **win)
 
 void		print_help(void)
 {
-	WINDOW			*help_win = NULL;
+	WINDOW			*help_win;
 	PANEL			*help_panel;
-	t_panel_data	panel_data;
-	t_panel_data	*temp;
 	int				ch;
 
 	init_win(&help_win);
 	help_panel = new_panel(help_win);
-	panel_data.hide = FALSE;
-	set_panel_userptr(help_panel, &panel_data);
 	update_panels();
 	doupdate();
-	while((ch = getch()) != 'h')
+	while((ch = getch()) != 'h' && ch != 'H')
 	{
 		update_panels();
 		doupdate();
 		ch = '\0';
 	}
-	temp = (t_panel_data *)panel_userptr(help_panel);
-	temp->hide = TRUE;
+	hide_panel(help_panel);
 }

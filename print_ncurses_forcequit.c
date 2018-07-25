@@ -30,10 +30,10 @@ static void	print_manual_text(WINDOW **win)
 	wattron(*win, COLOR_PAIR(5) | A_BOLD);
 	mvwaddstr(*win, 10 + 1, 5, "We did our best to make this fucking VM run!");
 	mvwaddstr(*win, 12 + 1, 5, "And now what?! You just quit!");
-	mvwaddstr(*win, 14 + 1, 5, "Ok, let's talk like adults.");
-	mvwaddstr(*win, 16 + 1, 5, "If your have balls, just press 'n' and watch.");
-	mvwaddstr(*win, 18 + 1, 5,
-		"Otherwise, press 'n' and run as far as you can.");
+	mvwaddstr(*win, 16 + 1, 5, "Ok, let's talk like adults.");
+	mvwaddstr(*win, 18 + 1, 5, "If your have balls, just press 'n' and watch.");
+	mvwaddstr(*win, 20 + 1, 5,
+		"Otherwise, you may press 'y' and run from here as far as you can.");
 }
 
 static void	init_quit_win(WINDOW **win)
@@ -62,26 +62,23 @@ static void	init_quit_win(WINDOW **win)
 
 void		sighandler(int signum)
 {
-	WINDOW			*quit_win = NULL;
+	WINDOW			*quit_win;
 	PANEL			*quit_panel;
-	t_panel_data	panel_data;
-	t_panel_data	*temp;
 	int				ch;
 
 	init_quit_win(&quit_win);
 	quit_panel = new_panel(quit_win);
-	panel_data.hide = FALSE;
-	set_panel_userptr(quit_panel, &panel_data);
 	update_panels();
 	doupdate();
-	while((ch = getch()) != 'N' && ch != 'n')
+	while ((ch = getch()))
 	{
 		if (ch == 'y' || ch == 'Y')
 			force_quit(signum);
+		if (ch == 'n' || ch == 'N')
+			break ;
 		update_panels();
 		doupdate();
 		ch = '\0';
 	}
-	temp = (t_panel_data *)panel_userptr(quit_panel);
-	temp->hide = TRUE;
+	hide_panel(quit_panel);
 }
