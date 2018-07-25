@@ -19,8 +19,13 @@
 # include <locale.h>
 # include "./libft/libft.h"
 # include "op.h"
+# include <panel.h>
+# include <string.h>
 
 # define COLOR_GREY 8
+
+# define HELP_LINES 30
+# define HELP_COLS 103
 
 typedef struct		s_ncurse
 {
@@ -32,6 +37,9 @@ typedef struct		s_ncurse
 	int				sizes[4];
 	unsigned char	*tab;
 }					t_ncurse;
+typedef struct		s_panel_data {
+	int				hide;
+}					t_panel_data;
 void				print_ncurses(t_ncurse *crwr);
 void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);

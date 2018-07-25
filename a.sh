@@ -1,4 +1,4 @@
-gcc -Wall -Wextra -Werror -lncurses -o crwr \
+gcc -Wall -Wextra -Werror -lpanel -lncurses -o crwr \
 main.c print_ncurses.c \
 print_ncurses_finish.c \
 print_ncurses_template.c \

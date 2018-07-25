@@ -47,10 +47,14 @@ void		print_music(t_ncurse *crwr)
 
 void		sighandler(int signum)
 {
-	WINDOW	*quit;
+	SCREEN *quit;
 
-	endwin();
+	quit = newterm(NULL, stdout, stdin);
+	set_term(quit);
+	initscr();
+		if (signum == 234)
+	{endwin();
 	system("pkill -9 'afplay'");
 	ft_printf("You have pressed Ctrl+C. Shame on you!");
-	exit(signum);
+	exit(signum);}
 }

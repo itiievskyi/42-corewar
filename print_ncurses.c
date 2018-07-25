@@ -23,8 +23,11 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 		halfdelay(1);
 		if ((ch = getch()) == ' ' || ch == 'h')
 			pause = 1;
-//		if (ch == 'h')
-//			print_help();
+		if (ch == 'h')
+		{
+			print_help();
+			pause = 0;
+		}
 		ch = '\0';
 	}
 	if ((!crwr->step || pause) && !mvaddstr(65, 202, "The game is paused... "))
