@@ -17,6 +17,7 @@ static void	force_quit(int signum)
 	system("clear");
 	system("pkill -9 'afplay'");
 	ft_printf("You have pressed Ctrl+C. Shame on you!");
+	endwin();
 	exit(signum);
 }
 
@@ -66,6 +67,7 @@ void		sighandler(int signum)
 	PANEL			*quit_panel;
 	int				ch;
 
+	raw();
 	init_quit_win(&quit_win);
 	quit_panel = new_panel(quit_win);
 	update_panels();
@@ -81,4 +83,5 @@ void		sighandler(int signum)
 		ch = '\0';
 	}
 	hide_panel(quit_panel);
+	cbreak();
 }
