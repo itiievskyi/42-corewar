@@ -19,8 +19,13 @@
 # include <locale.h>
 # include "./libft/libft.h"
 # include "op.h"
+# include <panel.h>
+# include <string.h>
 
 # define COLOR_GREY 8
+
+# define HELP_LINES 30
+# define HELP_COLS 103
 
 typedef struct		s_ncurse
 {
@@ -28,6 +33,9 @@ typedef struct		s_ncurse
 	int				players;
 	int				step;
 	int				proc;
+	int				pause;
+	int				help;
+	int				quit;
 	char			**names;
 	int				sizes[4];
 	unsigned char	*tab;
@@ -35,7 +43,7 @@ typedef struct		s_ncurse
 void				print_ncurses(t_ncurse *crwr);
 void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);
-void				print_finish(t_ncurse *crwr, int i);
+void				print_finish(t_ncurse *crwr, int i, char ch);
 void				print_field_start(t_ncurse *crwr, int i, int y, int x);
 void				print_help(void);
 void				print_music(t_ncurse *crwr);

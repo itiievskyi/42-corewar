@@ -44,13 +44,3 @@ void		print_music(t_ncurse *crwr)
 				pkill -9 'afplay'");
 	}
 }
-
-void		sighandler(int signum)
-{
-	WINDOW	*quit;
-
-	endwin();
-	system("pkill -9 'afplay'");
-	ft_printf("You have pressed Ctrl+C. Shame on you!");
-	exit(signum);
-}
