@@ -40,11 +40,8 @@ static void	print_winner(int winner)
 	}
 }
 
-void		print_finish(t_ncurse *crwr, int i)
+void		print_finish(t_ncurse *crwr, int i, char ch)
 {
-	char	ch;
-
-	ch = '\0';
 	attron(COLOR_PAIR(5) | A_BOLD);
 	mvaddstr(48, 218, "The winner is:");
 	mvaddstr(52, 214, "Thank you for playing!");

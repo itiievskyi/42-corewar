@@ -73,6 +73,7 @@ void		print_ncurses(t_ncurse *crwr)
 {
 	if (!crwr->step)
 		print_music(crwr);
+	signal(SIGINT, sighandler);
 	setlocale(LC_ALL, "en_US.UTF-8");
 	initscr();
 	start_color();
@@ -84,7 +85,7 @@ void		print_ncurses(t_ncurse *crwr)
 		print_template(0, 0, crwr);
 	to_buffer(crwr);
 	if (crwr->win > 0)
-		print_finish(crwr, 0);
+		print_finish(crwr, 0, '\0');
 	refresh();
 	check_pause(crwr, 0, '\0');
 	usleep(200000);
