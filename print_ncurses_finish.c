@@ -48,9 +48,11 @@ void		print_finish(t_ncurse *crwr, int i, char ch)
 	attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD);
 	mvprintw(50, 200 + ((50 - ft_strlen(crwr->names[crwr->win - 1])) / 2),
 		"%s", crwr->names[crwr->win - 1]);
-	halfdelay(1);
+	nodelay(stdscr, TRUE);
 	while (i++ < 10000 && ch != 'q')
 	{
+		if (ch == 'h')
+			print_help();
 		i % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
 			attron(COLOR_PAIR(5) | A_BOLD);
 		refresh();

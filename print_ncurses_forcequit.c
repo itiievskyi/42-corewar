@@ -14,10 +14,10 @@
 
 static void	force_quit(int signum)
 {
+	endwin();
 	system("clear");
 	system("pkill -9 'afplay'");
 	ft_printf("You have pressed Ctrl+C. Shame on you!");
-	endwin();
 	exit(signum);
 }
 

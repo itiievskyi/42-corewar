@@ -38,6 +38,7 @@ typedef struct		s_ncurse
 	int				quit;
 	char			**names;
 	int				sizes[4];
+	int				changes[5];
 	unsigned char	*tab;
 }					t_ncurse;
 void				print_ncurses(t_ncurse *crwr);

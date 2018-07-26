@@ -20,7 +20,7 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 	mvaddstr(65, 202, "The game is running...");
 	if (crwr->win == 0 && pause == 0)
 	{
-		halfdelay(1);
+		nodelay(stdscr, TRUE);
 		if ((ch = getch()) == ' ' || ch == 'h')
 			pause = 1;
 		if (ch == 'h')
@@ -35,20 +35,33 @@ static char	check_pause(t_ncurse *crwr, int pause, char ch)
 		attron(COLOR_PAIR(7) | A_BOLD);
 		mvaddstr(67, 202, "Press SPACE to resume the game");
 		while (ch != ' ')
-			ch = getch();
+			if ((ch = getch()) == 'h')
+				print_help();
 		ch = '\0';
 	}
 	return (ch);
 }
 
-static void	to_buffer(t_ncurse *crwr)
+static void	print_changes(t_ncurse *crwr)
 {
 	int i;
 	int x;
 	int y;
 
 	i = 0;
+	x = 4;
 	y = 9;
+	while (crwr->changes[i])
+	{
+		mvprintw(y + crwr->changes[i] / 64,
+				(x + (crwr->changes[i] / 64 * 3)), "%.2X ",
+				crwr->tab[crwr->changes[i]]);
+		i++;
+	}
+}
+
+static void	to_buffer(t_ncurse *crwr)
+{
 	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(39, 210, "%05d", crwr->step);
 	attroff(COLOR_PAIR(4) | A_BOLD);
@@ -57,16 +70,8 @@ static void	to_buffer(t_ncurse *crwr)
 		print_field_start(crwr, 0, 9, 0);
 		return ;
 	}
-	while (i < 4096 && crwr)
-	{
-		x = 4;
-		while (x < 195)
-		{
-			mvprintw(y, x, "%.2X ", crwr->tab[i++]);
-			x += 3;
-		}
-		y++;
-	}
+	else
+		print_changes(crwr);
 }
 
 void		print_ncurses(t_ncurse *crwr)

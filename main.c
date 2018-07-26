@@ -33,7 +33,7 @@ int		main()
 	crwr->sizes[2] = 680;
 	crwr->sizes[3] = 325;
 	crwr->tab = tab;
-	while (crwr->step < 50)
+	if (crwr->step == 0)
 	{
 		p = 0;
 		while (p < crwr->players)
@@ -44,6 +44,16 @@ int		main()
 				crwr->tab[i] = (unsigned char)rand() % 255;
 			}
 			p++;
+		}
+		print_ncurses(crwr);
+		(crwr->step)++;
+	}
+	while (crwr->step < 50)
+	{
+		p = rand() % 4090;
+		for (i = p + 5; i > p; i--) {
+			crwr->tab[i] = (unsigned char)rand() % 255;
+			crwr->changes[i - p - 1] = i;
 		}
 		if (crwr->step == 49)
 			crwr->win = time(NULL) % (crwr->players) + 1;
