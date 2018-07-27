@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_ncurses.h"
+#include "vm.h"
 #include <time.h>
 
 int		main()

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_ncurses.h"
+#include "vm.h"
 
 static void	print_winner(int winner)
 {

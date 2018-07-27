@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_ncurses.h                                    :+:      :+:    :+:   */
+/*   check_codage_patern2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itiievsk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 14:51:46 by itiievsk          #+#    #+#             */
-/*   Updated: 2018/07/17 14:51:48 by itiievsk         ###   ########.fr       */
+/*   Created: 2018/07/25 17:01:58 by averemiy          #+#    #+#             */
+/*   Updated: 2018/07/27 12:52:56 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_NCURSES_H
-# define PRINT_NCURSES_H
-# include <ncurses.h>
-# include <locale.h>
-# include <panel.h>
+#include "vm.h"
 
-# define COLOR_GREY 8
+int			c_c_st(int codage)
+{
+	int		arg1;
+	int		arg2;
 
-# define HELP_LINES 30
-# define HELP_COLS 103
-
-#endif
+	arg1 = bit_mask(1, codage);
+	arg2 = bit_mask(2, codage);
+	if (arg1 != 1)
+		return (1);
+	if (arg2 != 1 && arg2 != 2)
+		return (1);
+	return (0);
+}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_ncurses.h"
+#include "vm.h"
 
 void		print_field_start(t_ncurse *crwr, int i, int y, int x)
 {

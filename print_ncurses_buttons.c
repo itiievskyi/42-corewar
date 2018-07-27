@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_ncurses.h"
+#include "vm.h"
 
 static void	button_action(t_ncurse *crwr, char ch)
 {
