@@ -24,6 +24,7 @@ void		init_function(void (**f)(unsigned char *, t_pc **))
 	f[5] = &sub;
 	f[14] = &lldi;
 	f[10] = &ldi;
+	// before 16 -> printf!!!
 }
 
 void		get_command(unsigned char *map, t_pc *pc)
@@ -107,6 +108,10 @@ void		solve(t_player *p, unsigned char *map, t_pc *pc_1)
 			{
 				if (tmp->command == 12)
 					fork_1(map, tmp, &pc_1);
+				else if (tmp->command == 15)
+					printf("");
+				else if (tmp->command == 16)
+					printf("");
 				else if (tmp->command == 1)
 					live(map, p, tmp);
 				else

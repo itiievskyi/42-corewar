@@ -31,10 +31,10 @@ static void	print_changes(t_ncurse *crwr, t_pc *pc)
 			while (++j < 5)
 			{
 				i = (temp->change + j) % 4096;
-				mvprintw(y + crwr->changes[i] / 64,
-					(x + (crwr->changes[i] / 64 * 3)), "%.2X ",
-					crwr->tab[crwr->changes[i]]);
-					i++;
+				ft_printf("%i = %d", i);
+				mvprintw(y + i / 64,
+					(x + (i / 64 * 3)), "%.2X ",
+					crwr->tab[i]);
 			}
 		}
 		temp = temp->next;
