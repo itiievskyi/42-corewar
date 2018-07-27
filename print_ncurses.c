@@ -12,36 +12,6 @@
 
 #include "print_ncurses.h"
 
-static char	check_pause(t_ncurse *crwr, int pause, char ch)
-{
-	attron(COLOR_PAIR(7) | A_BOLD);
-	mvaddstr(67, 202, "Press SPACE to pause the game ");
-	attron(COLOR_PAIR(5) | A_BOLD);
-	mvaddstr(65, 202, "The game is running...");
-	if (crwr->win == 0 && pause == 0)
-	{
-		nodelay(stdscr, TRUE);
-		if ((ch = getch()) == ' ' || ch == 'h')
-			pause = 1;
-		if (ch == 'h')
-		{
-			print_help();
-			pause = 0;
-		}
-		ch = '\0';
-	}
-	if ((!crwr->step || pause) && !mvaddstr(65, 202, "The game is paused... "))
-	{
-		attron(COLOR_PAIR(7) | A_BOLD);
-		mvaddstr(67, 202, "Press SPACE to resume the game");
-		while (ch != ' ')
-			if ((ch = getch()) == 'h')
-				print_help();
-		ch = '\0';
-	}
-	return (ch);
-}
-
 static void	print_changes(t_ncurse *crwr)
 {
 	int i;
@@ -76,23 +46,26 @@ static void	to_buffer(t_ncurse *crwr)
 
 void		print_ncurses(t_ncurse *crwr)
 {
+	char	ch;
+
+	ch = '\0';
+	nodelay(stdscr, TRUE);
 	if (!crwr->step)
+	{
 		print_music(crwr);
-	signal(SIGINT, sighandler);
-	setlocale(LC_ALL, "en_US.UTF-8");
-	initscr();
-	start_color();
-	init_colors();
-	curs_set(0);
-	cbreak();
-	noecho();
-	if (crwr->step == 0)
+		signal(SIGINT, sighandler);
+		setlocale(LC_ALL, "en_US.UTF-8");
+		initscr();
 		print_template(0, 0, crwr);
+	}
+	init_colors();
 	to_buffer(crwr);
-	if (crwr->win > 0)
-		print_finish(crwr, 0, '\0');
-	refresh();
 	check_pause(crwr, 0, '\0');
-	usleep(200000);
-	endwin();
+	refresh();
+	if (crwr->win > 0)
+	{
+		print_finish(crwr, 0, '\0');
+		endwin();
+	}
+	usleep(20000 - crwr->pause * 5000);
 }

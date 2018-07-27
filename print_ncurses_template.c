@@ -109,6 +109,10 @@ void		print_misc(void)
 
 void		print_template(int x, int y, t_ncurse *crwr)
 {
+	start_color();
+	curs_set(0);
+	cbreak();
+	noecho();
 	attron(COLOR_PAIR(1) | A_BOLD);
 	while (x < 252)
 		mvprintw(y, x++, "*");
@@ -120,7 +124,7 @@ void		print_template(int x, int y, t_ncurse *crwr)
 		mvprintw(y, 0, "*");
 		mvprintw(y, 198, "*");
 		mvprintw(y, 251, "*");
-		if ((y == 56 || y == 63 || y == 37) && (x = 198))
+		if ((y == 56 || y == 63 || y == 35) && (x = 198))
 			while (x < 252)
 				mvprintw(y, x++, "*");
 	}

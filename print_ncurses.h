@@ -49,4 +49,6 @@ void				print_field_start(t_ncurse *crwr, int i, int y, int x);
 void				print_help(void);
 void				print_music(t_ncurse *crwr);
 void				sighandler(int signum);
+void				print_check_buttons(t_ncurse *crwr, char ch);
+char				check_pause(t_ncurse *crwr, int pause, char ch);
 #endif
