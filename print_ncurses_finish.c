@@ -43,10 +43,10 @@ static void	print_winner(int winner)
 void		print_finish(t_ncurse *crwr, int i, char ch)
 {
 	attron(COLOR_PAIR(5) | A_BOLD);
-	mvaddstr(48, 218, "The winner is:");
-	mvaddstr(52, 214, "Thank you for playing!");
+	mvaddstr(45 - 1, 218, "The winner is:");
+	mvaddstr(49 - 1, 214, "Thank you for playing!");
 	attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD);
-	mvprintw(50, 200 + ((50 - ft_strlen(crwr->names[crwr->win - 1])) / 2),
+	mvprintw(47 - 1, 200 + ((50 - ft_strlen(crwr->names[crwr->win - 1])) / 2),
 		"%s", crwr->names[crwr->win - 1]);
 	nodelay(stdscr, TRUE);
 	while (i++ < 10000 && ch != 'q')
@@ -60,9 +60,9 @@ void		print_finish(t_ncurse *crwr, int i, char ch)
 		attroff(COLOR_PAIR(10 * (crwr->win)) | COLOR_PAIR(5) | A_BOLD);
 		usleep(100000);
 		attron(COLOR_PAIR(7) | A_BOLD);
-		mvaddstr(67, 202, "Press 'q' to quit the game         ");
+		mvaddstr(61, 202, "Press 'q' to quit the game                   ");
 		attron(COLOR_PAIR(5) | A_BOLD);
-		mvaddstr(65, 202, "The game is over...    ");
+		mvaddstr(59, 202, "The game is over...    ");
 		ch = getch();
 	}
 	print_music(crwr);

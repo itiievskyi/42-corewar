@@ -34,8 +34,7 @@ typedef struct		s_ncurse
 	int				step;
 	int				proc;
 	int				pause;
-	int				help;
-	int				quit;
+	int				debug;
 	char			**names;
 	int				sizes[4];
 	int				changes[5];
@@ -50,5 +49,6 @@ void				print_help(void);
 void				print_music(t_ncurse *crwr);
 void				sighandler(int signum);
 void				print_check_buttons(t_ncurse *crwr, char ch);
-char				check_pause(t_ncurse *crwr, int pause, char ch);
+void				check_pause(t_ncurse *crwr, int pause, char ch);
+void				step_by_step(t_ncurse *crwr);
 #endif

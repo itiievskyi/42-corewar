@@ -33,7 +33,7 @@ static void	print_changes(t_ncurse *crwr)
 static void	to_buffer(t_ncurse *crwr)
 {
 	attron(COLOR_PAIR(4) | A_BOLD);
-	mvprintw(39, 210, "%05d", crwr->step);
+	mvprintw(38, 210, "%05d", crwr->step);
 	attroff(COLOR_PAIR(4) | A_BOLD);
 	if (crwr->step == 0)
 	{
@@ -46,9 +46,8 @@ static void	to_buffer(t_ncurse *crwr)
 
 void		print_ncurses(t_ncurse *crwr)
 {
-	char	ch;
-
-	ch = '\0';
+	if (crwr->debug == 1)
+		step_by_step(crwr);
 	nodelay(stdscr, TRUE);
 	if (!crwr->step)
 	{

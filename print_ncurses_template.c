@@ -32,11 +32,11 @@ static void	print_team(void)
 	mvaddstr(4, 207, "| |___| |__| |_| | |___| |\\  | |_| |");
 	mvaddstr(5, 207, "|_____|_____\\____|_____|_| \\_|____/ ");
 	attron(COLOR_PAIR(7) | A_BOLD);
-	mvaddstr(1 + 56, 207 + 5, " _   _ _____ _     ____  ");
-	mvaddstr(2 + 56, 207 + 5, "| | | | ____| |   |  _ \\ ");
-	mvaddstr(3 + 56, 207 + 5, "| |_| |  _| | |   | |_) |");
-	mvaddstr(4 + 56, 207 + 5, "|  _  | |___| |___|  __/ ");
-	mvaddstr(5 + 56, 207 + 5, "|_| |_|_____|_____|_|    ");
+	mvaddstr(1 + 50, 207 + 5, " _   _ _____ _     ____  ");
+	mvaddstr(2 + 50, 207 + 5, "| | | | ____| |   |  _ \\ ");
+	mvaddstr(3 + 50, 207 + 5, "| |_| |  _| | |   | |_) |");
+	mvaddstr(4 + 50, 207 + 5, "|  _  | |___| |___|  __/ ");
+	mvaddstr(5 + 50, 207 + 5, "|_| |_|_____|_____|_|    ");
 	mvaddstr(69, 202, "Press CTRL+C to exit at any time");
 	attroff(COLOR_PAIR(7) | A_BOLD);
 }
@@ -98,13 +98,18 @@ static void	print_players(t_ncurse *crwr, int i, int len)
 void		print_misc(void)
 {
 	attron(COLOR_PAIR(5) | A_BOLD);
-	mvaddstr(39, 202, "Cycle : ");
-	mvaddstr(39, 227, "Processes : ");
-	mvprintw(41, 202, "CYCLE_TO_DIE : %d", CYCLE_TO_DIE);
-	mvprintw(41, 227, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	mvprintw(43, 202, "NBR_LIVE : %d", NBR_LIVE);
-	mvprintw(43, 227, "MAX_CHECKS : %d", MAX_CHECKS);
+	mvaddstr(39 - 1, 202, "Cycle : ");
+	mvaddstr(39 - 1, 227, "Processes : ");
+	mvprintw(41 - 1, 202, "CYCLE_TO_DIE : %d", CYCLE_TO_DIE);
+	mvprintw(41 - 1, 227, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvprintw(43 - 1, 202, "NBR_LIVE : %d", NBR_LIVE);
+	mvprintw(43 - 1, 227, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(COLOR_PAIR(5) | A_BOLD);
+	attron(COLOR_PAIR(40) | A_BOLD);
+	mvaddstr(65, 202, "Press 'h' to turn Manual on/off");
+	mvaddstr(67, 202, "Press '+' or '-' to change the speed");
+	mvaddstr(63, 202, "Press 's' to manage with DEBUG mod");
+	attroff(COLOR_PAIR(40) | A_BOLD);
 }
 
 void		print_template(int x, int y, t_ncurse *crwr)
@@ -124,7 +129,7 @@ void		print_template(int x, int y, t_ncurse *crwr)
 		mvprintw(y, 0, "*");
 		mvprintw(y, 198, "*");
 		mvprintw(y, 251, "*");
-		if ((y == 56 || y == 63 || y == 35) && (x = 198))
+		if ((y == 50 || y == 57 || y == 34) && (x = 198))
 			while (x < 252)
 				mvprintw(y, x++, "*");
 	}
