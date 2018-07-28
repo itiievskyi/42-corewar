@@ -33,4 +33,5 @@ void		print_field_start(t_ncurse *crwr, int i, int y, int x)
 		}
 		y++;
 	}
+	mvprintw(38, 239, "%02d", crwr->proc);
 }

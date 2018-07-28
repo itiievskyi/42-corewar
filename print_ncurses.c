@@ -31,18 +31,19 @@ static void	print_changes(t_ncurse *crwr, t_pc *pc)
 			while (++j < 5)
 			{
 				i = (temp->change + j) % 4096;
-				ft_printf("%i = %d", i);
 				mvprintw(y + i / 64,
-					(x + (i / 64 * 3)), "%.2X ",
+					(x + (i % 64 * 3)), "%.2X ",
 					crwr->tab[i]);
 			}
 		}
 		temp = temp->next;
+		crwr->proc++;
 	}
 }
 
 static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 {
+	crwr->proc = 0;
 	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(38, 210, "%05d", crwr->step);
 	attroff(COLOR_PAIR(4) | A_BOLD);
@@ -53,6 +54,7 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 	}
 	else
 		print_changes(crwr, pc);
+	mvprintw(38, 239, "%02d", crwr->proc);
 }
 
 void		print_ncurses(t_ncurse *crwr, t_pc *pc)
