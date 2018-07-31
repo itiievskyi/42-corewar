@@ -17,6 +17,7 @@ void		init_colors(void)
 	attroff(COLOR_PAIR(1) | COLOR_PAIR(5) | COLOR_PAIR(7) | A_BOLD);
 	init_color(COLOR_GREY, 500, 500, 500);
 	init_pair(1, COLOR_GREY, COLOR_GREY);
+	init_pair(2, COLOR_GREY, COLOR_BLACK);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(5, COLOR_WHITE, COLOR_BLACK);
 	init_pair(6, COLOR_GREEN, COLOR_BLACK);

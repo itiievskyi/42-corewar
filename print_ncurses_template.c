@@ -62,6 +62,7 @@ static void	print_header(void)
 	mvprintw(5, 88, "%s", "└─┘ ┴ ");
 	mvaddstr(71, 202, "The project is prepared for 42School's project");
 	mvaddstr(72, 202, "COREWAR in 2018. All rights reserved, cheaters");
+	mvprintw(37 - 1, 202, "The current game speed modifier:  0");
 	attroff(COLOR_PAIR(5) | A_BOLD);
 	print_team();
 }

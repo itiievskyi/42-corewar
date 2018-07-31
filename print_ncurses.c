@@ -12,35 +12,6 @@
 
 #include "vm.h"
 
-static void	print_changes(t_ncurse *crwr, t_pc *pc)
-{
-	int i;
-	int j;
-	int x;
-	int y;
-	t_pc	*temp;
-
-	temp = pc;
-	x = 4;
-	y = 9;
-	while (temp)
-	{
-		j = 0;
-		if (temp->change >= 0)
-		{
-			while (++j < 5)
-			{
-				i = (temp->change + j) % 4096;
-				mvprintw(y + i / 64,
-					(x + (i % 64 * 3)), "%.2X ",
-					crwr->tab[i]);
-			}
-		}
-		temp = temp->next;
-		crwr->proc++;
-	}
-}
-
 static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 {
 	crwr->proc = 0;
@@ -59,8 +30,10 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 
 void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 {
-	if (crwr->debug == 1)
-		step_by_step(crwr);
+	static int	debug;
+
+	if (debug == 1)
+		step_by_step(crwr, &debug);
 	nodelay(stdscr, TRUE);
 	if (!crwr->step)
 	{
@@ -73,7 +46,7 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 	}
 	init_colors();
 	to_buffer(crwr, pc);
-	check_pause(crwr, 0, '\0');
+	check_pause(crwr, 0, '\0', &debug);
 	refresh();
 	if (crwr->win > 0)
 	{

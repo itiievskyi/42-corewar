@@ -123,7 +123,7 @@ typedef struct		s_ncurse
 	int				debug;
 	char			**names;
 	int				sizes[4];
-	int				changes[5];
+	int				ids[4];
 	unsigned char	*tab;
 }					t_ncurse;
 void				print_ncurses(t_ncurse *crwr, t_pc *pc);
@@ -135,8 +135,9 @@ void				print_help(void);
 void				print_music(t_ncurse *crwr);
 void				sighandler(int signum);
 void				print_check_buttons(t_ncurse *crwr, char ch);
-void				check_pause(t_ncurse *crwr, int pause, char ch);
-void				step_by_step(t_ncurse *crwr);
+void				check_pause(t_ncurse *crwr, int pause, char ch, int *debug);
+void				step_by_step(t_ncurse *crwr, int *debug);
+void				print_changes(t_ncurse *crwr, t_pc *pc);
 
 #define BUF_SIZE 1
 #endif

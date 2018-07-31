@@ -45,6 +45,7 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
 	{
 		crwr->names[i] = ft_strdup((const char*)(p->p_name));
 		crwr->sizes[i] = p->p_size;
+		crwr->ids[i] = p->p_id;
 		p = p->next;
 	}
 	crwr->step = y;
