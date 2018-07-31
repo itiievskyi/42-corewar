@@ -33,7 +33,7 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 	static int	debug;
 
 	if (debug == 1)
-		step_by_step(crwr, &debug);
+		step_by_step(&debug);
 	nodelay(stdscr, TRUE);
 	if (!crwr->step)
 	{

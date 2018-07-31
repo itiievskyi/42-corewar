@@ -18,7 +18,7 @@ static void	button_action(t_ncurse *crwr, char ch, int *debug)
 
 	if (ch == '+' && pause < 4)
 		pause += 1;
-	else if (ch == '-' && pause > -4)
+	else if (ch == '-' && pause > -5)
 		pause -= 1;
 	else if (ch == 'h' || ch == 'H')
 		print_help();
@@ -65,7 +65,7 @@ void		check_pause(t_ncurse *crwr, int pause, char ch, int *debug)
 	}
 }
 
-void		step_by_step(t_ncurse *crwr, int *debug)
+void		step_by_step(int *debug)
 {
 	char	ch;
 
@@ -74,9 +74,9 @@ void		step_by_step(t_ncurse *crwr, int *debug)
 	{
 		halfdelay(10000);
 		while (ch != 's' && ch != ' ' && ch != 'S')
-			ch = getch();
+			if ((ch = getch()) == 'h' || ch == 'H')
+				print_help();
 		if (ch == ' ')
 			*debug = 0;
 	}
-	if (crwr) {}
 }

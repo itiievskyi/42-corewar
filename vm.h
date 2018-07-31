@@ -136,7 +136,7 @@ void				print_music(t_ncurse *crwr);
 void				sighandler(int signum);
 void				print_check_buttons(t_ncurse *crwr, char ch);
 void				check_pause(t_ncurse *crwr, int pause, char ch, int *debug);
-void				step_by_step(t_ncurse *crwr, int *debug);
+void				step_by_step(int *debug);
 void				print_changes(t_ncurse *crwr, t_pc *pc);
 
 #define BUF_SIZE 1
