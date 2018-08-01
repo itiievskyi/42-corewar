@@ -36,17 +36,19 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
 	int				i;
 	static t_ncurse	*crwr;
 
-	if (pc && y != -3) {}
-	i = -1;
-	crwr = (t_ncurse*)malloc(sizeof(t_ncurse));
-	crwr->players = count_player(p);
-	crwr->names = (char**)malloc(sizeof(char*) * 4);
-	while (++i < crwr->players)
+	if (y == 0)
 	{
-		crwr->names[i] = ft_strdup((const char*)(p->p_name));
-		crwr->sizes[i] = p->p_size;
-		crwr->ids[i] = p->p_id;
-		p = p->next;
+		i = -1;
+		crwr = (t_ncurse*)malloc(sizeof(t_ncurse));
+		crwr->players = count_player(p);
+		crwr->names = (char**)malloc(sizeof(char*) * 4);
+		while (++i < crwr->players)
+		{
+			crwr->names[i] = ft_strdup((const char*)(p->p_name));
+			crwr->sizes[i] = p->p_size;
+			crwr->ids[i] = p->p_id;
+			p = p->next;
+		}
 	}
 	crwr->step = y;
 	crwr->pause = 0;

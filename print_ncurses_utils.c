@@ -15,6 +15,8 @@
 void		init_colors(void)
 {
 	attroff(COLOR_PAIR(1) | COLOR_PAIR(5) | COLOR_PAIR(7) | A_BOLD);
+	attroff(COLOR_PAIR(4) | COLOR_PAIR(6) | A_STANDOUT);
+	attroff(COLOR_PAIR(10) | COLOR_PAIR(20) | COLOR_PAIR(30) | COLOR_PAIR(40));
 	init_color(COLOR_GREY, 500, 500, 500);
 	init_pair(1, COLOR_GREY, COLOR_GREY);
 	init_pair(2, COLOR_GREY, COLOR_BLACK);
@@ -44,4 +46,18 @@ void		print_music(t_ncurse *crwr)
 		system("#!/bin/sh\n\
 				pkill -9 'afplay'");
 	}
+}
+
+int			get_player(t_ncurse *crwr, t_pc *pc)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (pc->parent == crwr->ids[i])
+			break ;
+		i++;
+	}
+	return (i + 1);
 }

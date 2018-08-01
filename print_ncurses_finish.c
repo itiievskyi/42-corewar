@@ -40,6 +40,17 @@ static void	print_winner(int winner)
 	}
 }
 
+void		print_ncurses_free(t_ncurse *crwr)
+{
+	int		i;
+
+	i = 0;
+	while (i < crwr->players)
+		free(crwr->names[i++]);
+	free(crwr->names);
+	free(crwr);
+}
+
 void		print_finish(t_ncurse *crwr, int i, char ch)
 {
 	attron(COLOR_PAIR(5) | A_BOLD);
@@ -66,4 +77,5 @@ void		print_finish(t_ncurse *crwr, int i, char ch)
 		ch = getch();
 	}
 	print_music(crwr);
+	print_ncurses_free(crwr);
 }

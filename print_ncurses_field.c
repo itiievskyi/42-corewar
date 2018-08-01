@@ -12,26 +12,43 @@
 
 #include "vm.h"
 
-static int	get_player(t_ncurse *crwr, t_pc *pc)
+static void	print_highlights(t_ncurse *crwr, int s[], int x, int y)
 {
 	int		i;
 
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (++i < 4096)
 	{
-		if (pc->parent == crwr->ids[i])
-			break ;
-		i++;
+		if (s[i] > 0)
+		{
+			attron(COLOR_PAIR(s[i]) | A_STANDOUT);
+			mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
+			attroff(COLOR_PAIR(s[i]) | A_STANDOUT);
+			s[i] *= -1;
+		}
+		else if (s[i] < 0 && s[i] != -100)
+		{
+			attron(COLOR_PAIR(s[i] * (-1)));
+			mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
+			attroff(COLOR_PAIR(s[i] * (-1)));
+			s[i] = -100;
+		}
+		else if (s[i] == -100 && crwr->tab[i] == 0)
+		{
+			attron(COLOR_PAIR(2));
+			mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", 0);
+			attroff(COLOR_PAIR(2));
+			s[i] = -100;
+		}
 	}
-	return (i + 1);
 }
 
 void		check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd)
 {
 	static int	s[4096];
 	int			i;
-	int x;
-	int y;
+	int			x;
+	int			y;
 
 	x = 4;
 	y = 9;
@@ -41,41 +58,16 @@ void		check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd)
 		s[i] = get_player(crwr, temp) * 10;
 	}
 	if (ft_strequ(cmd, "print"))
-	{
-		mvprintw(80, 90, "%.2X ", 0);
-		i = -1;
-		while (++i < 4096)
-		{
-			if (s[i] > 0)
-			{
-				attron(COLOR_PAIR(s[i]) | A_STANDOUT);
-				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
-				attroff(COLOR_PAIR(s[i]) | A_STANDOUT);
-				s[i] *= -1;
-			}
-			else if (s[i] < 0)
-			{
-				attron(COLOR_PAIR(s[i] * (-1)));
-				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
-				attroff(COLOR_PAIR(s[i] * (-1)));
-				s[i] = 0;
-			}
-		}
-	}
+		print_highlights(crwr, s, x, y);
 }
 
-void		print_changes(t_ncurse *crwr, t_pc *pc)
+void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 {
 	int i;
 	int j;
-	int x;
-	int y;
 	t_pc	*temp;
 
 	temp = pc;
-	x = 4;
-	y = 9;
-	int k = 0;
 	while (temp)
 	{
 		attron(COLOR_PAIR(10 * get_player(crwr, temp)) | A_BOLD);
@@ -87,15 +79,9 @@ void		print_changes(t_ncurse *crwr, t_pc *pc)
 			while (++j < 5)
 			{
 				i = (temp->change + j) % 4096 - 1;
-				mvprintw(y + i / 64,
-					(x + (i % 64 * 3)), "%.2X ",
-					crwr->tab[i]);
+				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X ", crwr->tab[i]);
 			}
 		}
-		mvprintw(78 + k, 10, "Player = %d", get_player(crwr, temp));
-		mvprintw(78 + k, 40, "size = %d", temp->size);
-		mvprintw(78 + k, 70, "change = %d", temp->change);
-		k++;
 		temp = temp->next;
 		crwr->proc++;
 		attroff(A_BOLD);

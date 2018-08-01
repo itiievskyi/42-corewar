@@ -137,7 +137,9 @@ void				sighandler(int signum);
 void				print_check_buttons(t_ncurse *crwr, char ch);
 void				check_pause(t_ncurse *crwr, int pause, char ch, int *debug);
 void				step_by_step(int *debug);
-void				print_changes(t_ncurse *crwr, t_pc *pc);
+int					get_player(t_ncurse *crwr, t_pc *pc);
+void				print_changes(t_ncurse *crwr, t_pc *pc, int y, int x);
+void				print_ncurses_free(t_ncurse *crwr);
 
 #define BUF_SIZE 1
 #endif

@@ -24,7 +24,7 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 		return ;
 	}
 	else
-		print_changes(crwr, pc);
+		print_changes(crwr, pc, 9, 4);
 	mvprintw(38, 239, "%02d", crwr->proc);
 }
 
