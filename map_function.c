@@ -37,6 +37,7 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
 	int				i;
 	static t_ncurse	*crwr;
 
+	p->last_live == 2147483648 ? 0 : print_players_lives(p);
 	if (y == 0)
 	{
 		i = -1;

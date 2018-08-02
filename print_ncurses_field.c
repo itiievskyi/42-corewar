@@ -12,6 +12,19 @@
 
 #include "vm.h"
 
+void		print_players_lives(t_player *p)
+{
+	int i;
+
+	i = -1;
+	while (p && ++i < 4)
+	{
+		mvprintw(9 + 6 * i, 227, "last_live: %-5d", p->last_live);
+		mvprintw(11 + 6 * i, 227, "p_live: %-5d", p->p_live);
+		p = p->next;
+	}
+}
+
 void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 {
 	int		i;
