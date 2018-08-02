@@ -24,12 +24,12 @@ void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 		attron(COLOR_PAIR(10 * get_player(crwr, temp)) | A_BOLD);
 		if (temp->size >= 0 && temp->size < 4096)
 			check_highlites(crwr, temp, "write");
-		j = 0;
+		j = -1;
 		if (temp->change >= 0)
 		{
-			while (++j < 5)
+			while (++j < 4)
 			{
-				i = (temp->change + j) % 4096 - 1;
+				i = (temp->change + j) % 4096;
 				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X ", crwr->tab[i]);
 				if (get_player(crwr, temp) > 0)
 					crwr->chng[i] = 10 * get_player(crwr, temp);
