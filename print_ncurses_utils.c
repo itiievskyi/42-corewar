@@ -59,5 +59,7 @@ int			get_player(t_ncurse *crwr, t_pc *pc)
 			break ;
 		i++;
 	}
-	return (i + 1);
+	if (i < 4 && i >= 0)
+		return (i + 1);
+	return (0);
 }

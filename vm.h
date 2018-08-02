@@ -125,6 +125,7 @@ typedef struct		s_ncurse
 	int				sizes[4];
 	int				ids[4];
 	unsigned char	*tab;
+	int				*chng;
 }					t_ncurse;
 void				print_ncurses(t_ncurse *crwr, t_pc *pc);
 void				init_colors(void);
@@ -140,6 +141,7 @@ void				step_by_step(int *debug);
 int					get_player(t_ncurse *crwr, t_pc *pc);
 void				print_changes(t_ncurse *crwr, t_pc *pc, int y, int x);
 void				print_ncurses_free(t_ncurse *crwr);
+void				check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd);
 
 #define BUF_SIZE 1
 #endif

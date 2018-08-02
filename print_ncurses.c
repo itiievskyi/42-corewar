@@ -31,7 +31,9 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 {
 	static int	debug;
+	static int	chng[4096];
 
+	crwr->chng = chng;
 	if (debug == 1)
 		step_by_step(&debug);
 	nodelay(stdscr, TRUE);
@@ -42,6 +44,7 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 		signal(SIGINT, sighandler);
 		setlocale(LC_ALL, "en_US.UTF-8");
 		initscr();
+		init_colors();
 		print_template(0, 0, crwr);
 	}
 	init_colors();
@@ -54,4 +57,8 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 		endwin();
 	}
 	usleep(20000 - crwr->pause * 5000);
+	int i = -1;
+	while (++i < 4096) {
+		mvprintw(78 + i, 4, "i = %d", crwr->chng[i]);
+	}
 }

@@ -67,15 +67,15 @@ static void	init_win(WINDOW **win)
 
 void		print_help(void)
 {
-	WINDOW			*help_win;
-	PANEL			*help_panel;
 	int				ch;
+	WINDOW			*help_win;
 
+	PANEL * help_panel;
 	init_win(&help_win);
 	help_panel = new_panel(help_win);
 	update_panels();
 	doupdate();
-	while((ch = getch()) != 'h' && ch != 'H')
+	while ((ch = getch()) != 'h' && ch != 'H')
 	{
 		update_panels();
 		doupdate();

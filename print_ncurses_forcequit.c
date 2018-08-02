@@ -63,10 +63,10 @@ static void	init_quit_win(WINDOW **win)
 
 void		sighandler(int signum)
 {
-	WINDOW			*quit_win;
-	PANEL			*quit_panel;
 	int				ch;
+	WINDOW			*quit_win;
 
+	PANEL * quit_panel;
 	raw();
 	init_quit_win(&quit_win);
 	quit_panel = new_panel(quit_win);
