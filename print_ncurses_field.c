@@ -45,7 +45,10 @@ void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 				i = (temp->change + j) % 4096;
 				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X ", crwr->tab[i]);
 				if (get_player(crwr, temp) > 0)
+				{
 					crwr->chng[i] = 10 * get_player(crwr, temp);
+					check_highlites(crwr, temp, "write_change");
+				}
 			}
 			temp->change = -1;
 		}

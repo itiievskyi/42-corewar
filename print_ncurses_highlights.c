@@ -19,12 +19,18 @@ static void	print_highlights(t_ncurse *crwr, int s[], int x, int y)
 	i = -1;
 	while (++i < 4096)
 	{
-		if (s[i] > 0)
+		if (s[i] > 0 && s[i] < 100)
 		{
 			attron(COLOR_PAIR(s[i]) | A_STANDOUT);
 			mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
 			attroff(COLOR_PAIR(s[i]) | A_STANDOUT);
 			s[i] *= -1;
+		}
+		else if (s[i] > 100)
+		{
+			s[i] = s[i] - 100;
+			if (s[i] < 100)
+				s[i] *= -1;
 		}
 		else if (s[i] < 0)
 		{
@@ -58,6 +64,14 @@ void		check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd)
 	{
 		i = (temp->size) % 4096;
 		s[i] = (crwr->chng[i] == 0 ? 50 : crwr->chng[i]);
+	}
+	if (ft_strequ(cmd, "write_change"))
+	{
+		i = (temp->change) % 4096;
+		s[i] = crwr->chng[i] + 4900;
+		s[i + 1] = crwr->chng[i] + 4900;
+		s[i + 2] = crwr->chng[i] + 4900;
+		s[i + 3] = crwr->chng[i] + 4900;
 	}
 	if (ft_strequ(cmd, "print"))
 		print_highlights(crwr, s, x, y);
