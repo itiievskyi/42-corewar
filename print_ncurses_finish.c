@@ -45,6 +45,8 @@ void		print_ncurses_free(t_ncurse *crwr)
 	int		i;
 
 	i = 0;
+	mvprintw(38, 210, "%05d", crwr->step + 2);
+	refresh();
 	while (i < crwr->players)
 		free(crwr->names[i++]);
 	free(crwr->names);
@@ -60,11 +62,11 @@ void		print_finish(t_ncurse *crwr, int i, char ch)
 	mvprintw(47 - 1, 200 + ((50 - ft_strlen(crwr->names[crwr->win - 1])) / 2),
 		"%s", crwr->names[crwr->win - 1]);
 	nodelay(stdscr, TRUE);
-	while (i++ < 10000 && ch != 'q')
+	while (i < 10000 && ch != 'q' && !mvprintw(38, 210, "%05d", crwr->step + 2))
 	{
 		if (ch == 'h')
 			print_help();
-		i % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
+		i++ % 2 == 0 ? attron(COLOR_PAIR(10 * (crwr->win)) | A_BOLD) :
 			attron(COLOR_PAIR(5) | A_BOLD);
 		refresh();
 		print_winner(crwr->win);

@@ -129,6 +129,7 @@ typedef struct		s_ncurse
 	int				proc;
 	int				pause;
 	int				debug;
+	int				music;
 	char			**names;
 	int				sizes[4];
 	unsigned int	ids[4];

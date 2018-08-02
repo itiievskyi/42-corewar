@@ -16,7 +16,7 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 {
 	crwr->proc = 0;
 	attron(COLOR_PAIR(4) | A_BOLD);
-	mvprintw(38, 210, "%05d", crwr->step);
+	mvprintw(38, 210, "%-5d", crwr->step + 1);
 	attroff(COLOR_PAIR(4) | A_BOLD);
 	if (crwr->step == 0)
 	{
@@ -25,7 +25,7 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 	}
 	else
 		print_changes(crwr, pc, 9, 4);
-	mvprintw(38, 239, "%02d", crwr->proc);
+	mvprintw(38, 239, "%-6d", crwr->proc);
 }
 
 void		print_ncurses(t_ncurse *crwr, t_pc *pc)
