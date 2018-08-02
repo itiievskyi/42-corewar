@@ -57,7 +57,7 @@ void		check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd)
 	if (ft_strequ(cmd, "write"))
 	{
 		i = (temp->size) % 4096;
-		s[i] = (crwr->chng[i] == 0 ? 0 : crwr->chng[i]);
+		s[i] = (crwr->chng[i] == 0 ? 50 : crwr->chng[i]);
 	}
 	if (ft_strequ(cmd, "print"))
 		print_highlights(crwr, s, x, y);
