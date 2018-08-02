@@ -46,7 +46,6 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 		init_colors();
 		print_template(0, 0, crwr);
 	}
-	mvprintw(80, 4, "step = %d", crwr->step);
 	init_colors();
 	to_buffer(crwr, pc);
 	check_pause(crwr, 0, '\0', &debug);

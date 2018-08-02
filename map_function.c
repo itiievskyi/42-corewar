@@ -51,6 +51,9 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
 			p = p->next;
 		}
 	}
+	if (p)
+		p->last_live == 2147483648 ?
+		crwr->win = get_player_byid(crwr, p->p_id) : 0;
 	crwr->step = y;
 	crwr->pause = 0;
 	crwr->tab = map;

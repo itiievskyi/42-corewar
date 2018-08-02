@@ -34,6 +34,7 @@ void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 				if (get_player(crwr, temp) > 0)
 					crwr->chng[i] = 10 * get_player(crwr, temp);
 			}
+			temp->change = -1;
 		}
 		temp = temp->next;
 		crwr->proc++;

@@ -63,3 +63,19 @@ int			get_player(t_ncurse *crwr, t_pc *pc)
 		return (i + 1);
 	return (0);
 }
+
+int			get_player_byid(t_ncurse *crwr, int id)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if ((unsigned int)id == crwr->ids[i])
+			break ;
+		i++;
+	}
+	if (i < 4 && i >= 0)
+		return (i + 1);
+	return (0);
+}

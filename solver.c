@@ -147,9 +147,9 @@ void			game_over(t_player *p, t_pc *pc, unsigned char *map, int i)
 			p_win = p;
 		p = p->next;
 	}
-//	if (pc && p && map && i) {}
-	print_map(map, pc, p, i - 1);
-	exit (1);
+	p_win->last_live = 2147483648;
+	print_map(map, pc, p_win, i - 1);
+	exit(1);
 }
 
 void		solve(t_player *p, unsigned char *map, t_pc *pc_1)

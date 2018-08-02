@@ -72,6 +72,7 @@ t_pc			*create_pc(t_player *p)
 	{
 		p->stand = (j * (del / i));
 		init_pc(&pc, p->p_id, ((j * (del / i))));
+		pc->change = -1;
 		p = p->next;
 	}
 	return (pc);

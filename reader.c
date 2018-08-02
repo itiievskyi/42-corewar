@@ -78,7 +78,7 @@ t_player			*read_p_from_f(char *name, int id)
 	p->p_id = id;
 	p->next = NULL;
 	fd = open(name, O_RDONLY);
-	if (fd >= 0)
+	if (fd >= 0 && (p->last_live = 0) == 0)
 	{
 		tmp = read_all(fd, p, 0, 0);
 		p->p_size = read_size(tmp);

@@ -28,6 +28,7 @@ void		copy_pc(t_pc *pc1, t_pc *pc2, int stand, unsigned char *map)
 	pc1->live = pc2->live;
 	pc1->cicles = 0;
 	pc1->command = 0;
+	pc1->change = -1;
 	pc2->size += get_size(map, pc2->command, pc2->size);
 	pc2->command = 0;
 }
