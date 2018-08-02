@@ -39,7 +39,6 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 	nodelay(stdscr, TRUE);
 	if (!crwr->step)
 	{
-		printf("%d\n", crwr->players);
 		print_music(crwr);
 		signal(SIGINT, sighandler);
 		setlocale(LC_ALL, "en_US.UTF-8");
@@ -47,6 +46,7 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 		init_colors();
 		print_template(0, 0, crwr);
 	}
+	mvprintw(80, 4, "step = %d", crwr->step);
 	init_colors();
 	to_buffer(crwr, pc);
 	check_pause(crwr, 0, '\0', &debug);
@@ -57,8 +57,4 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 		endwin();
 	}
 	usleep(20000 - crwr->pause * 5000);
-	int i = -1;
-	while (++i < 4096) {
-		mvprintw(78 + i, 4, "i = %d", crwr->chng[i]);
-	}
 }

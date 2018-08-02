@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 18:07:51 by averemiy          #+#    #+#             */
-/*   Updated: 2018/07/25 16:59:32 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/07/31 17:03:19 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		sub(unsigned char *map, t_pc **pc1)
 
 	pc = (*pc1);
 	if (!(c_c_add_sub(get_map(map, pc->size + 1))))
-	{	
+	{
 		pc = (*pc1);
 		tmp4 = 0;
 		tmp1 = take_arg(map, 1, pc->size + 2);

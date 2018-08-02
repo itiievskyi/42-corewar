@@ -33,7 +33,7 @@ void		st(unsigned char *map, t_pc **pc1)
 		else
 		{
 			j = (short)take_arg(map, 2, pc->size + 3);
-			set_bit(pc, pc->size + (j % IDX_MOD), map, pc->arg[0]);
+			set_bit(pc->size + (j % IDX_MOD), map, pc->arg[0]);
 		}
 	}
 	pc->size += size_tmp;

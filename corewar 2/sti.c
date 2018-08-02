@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and.c                                              :+:      :+:    :+:   */
+/*   sti.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 16:12:56 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 17:56:22 by averemiy         ###   ########.fr       */
+/*   Created: 2018/07/13 16:02:10 by averemiy          #+#    #+#             */
+/*   Updated: 2018/08/01 18:58:46 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		and(unsigned char *map, t_pc **pc1)
-{
-	int		jump;
-	t_pc	*pc;
+void		sti(unsigned char *map, t_pc **pc1)
+{	
 	int		i;
+	t_pc	*pc;
+	int		size_tmp;
+	int		j;
 
 	pc = (*pc1);
-	if (!(c_c_and_or_xor(get_map(map, pc->size + 1))) &&
-			(i = red_arg(map, pc, 3)) != -1)
+	size_tmp = get_size(map, pc->command, pc->size);
+	if (!(c_c_sti(get_map(map, pc->size + 1))) &&
+	   (i = red_arg(map, pc, 3)) != -1)
 	{
-		jump = red_arg(map, pc, 2);
-		pc->reg[get_map(map, jump) - 1] = pc->arg[0] & pc->arg[1];
-		if (!(pc->arg[0] & pc->arg[1]))
-			pc->carry = 1;
-		else
-			pc->carry = 0;
+		j = (short)(pc->arg[1] + pc->arg[2]);
+		set_bit(pc->size + (j % IDX_MOD), map, pc->arg[0]);
 	}
-	pc->size += get_size(map, pc->command, pc->size);
+	pc->size += size_tmp;
 	pc->command = 0;
 }

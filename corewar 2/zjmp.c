@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and.c                                              :+:      :+:    :+:   */
+/*   zjmp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 16:12:56 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 17:56:22 by averemiy         ###   ########.fr       */
+/*   Created: 2018/07/13 16:13:20 by averemiy          #+#    #+#             */
+/*   Updated: 2018/08/01 16:43:11 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		and(unsigned char *map, t_pc **pc1)
+void		zjmp(unsigned char *map, t_pc **pc1)
 {
-	int		jump;
-	t_pc	*pc;
-	int		i;
+	int tmp3;
+	t_pc *pc;
 
 	pc = (*pc1);
-	if (!(c_c_and_or_xor(get_map(map, pc->size + 1))) &&
-			(i = red_arg(map, pc, 3)) != -1)
+	tmp3 = 0;
+	//printf("start zjmp\n");
+	if (pc->carry == 1)
 	{
-		jump = red_arg(map, pc, 2);
-		pc->reg[get_map(map, jump) - 1] = pc->arg[0] & pc->arg[1];
-		if (!(pc->arg[0] & pc->arg[1]))
-			pc->carry = 1;
-		else
-			pc->carry = 0;
+		tmp3 = ((short)take_arg(map, 2, pc->size + 1)) % IDX_MOD;
+		pc->size += tmp3;
+		pc->size = set_place(pc->size);
+		pc->command = 0;
 	}
-	pc->size += get_size(map, pc->command, pc->size);
-	pc->command = 0;
+	else
+	{
+		pc->size += get_size(map, pc->command, pc->size);
+		pc->command = 0;
+	}
+
+	//printf("end zjmp\n");
 }

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld.c                                               :+:      :+:    :+:   */
+/*   lld.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/14 13:44:26 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:51:10 by averemiy         ###   ########.fr       */
+/*   Created: 2018/07/30 13:39:14 by averemiy          #+#    #+#             */
+/*   Updated: 2018/08/01 18:51:07 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void				carry_stand(t_pc *pc, unsigned int tmp)
+unsigned int			lld_helper(unsigned char *map, t_pc *pc)
 {
-	if (tmp == 0)
+	int					size;
+	unsigned int		k;
+
+	size = pc->size + ((short)(take_arg(map, 2, pc->size + 2)));
+	k = take_arg(map, 4, size);
+	if (k == 0)
 		pc->carry = 1;
 	else
 		pc->carry = 0;
+	return (k);
 }
 
-void					ld(unsigned char *map, t_pc **pc1)
+void					lld(unsigned char *map, t_pc **pc1)
 {
 	int					i;
 	t_pc				*pc;
@@ -33,8 +39,14 @@ void					ld(unsigned char *map, t_pc **pc1)
 	{
 		pc->arg[0] = -1;
 		i = red_arg(map, pc, 2);
-		pc->reg[get_map(map, i - 1) - 1] = pc->arg[0];
-		carry_stand(pc, pc->arg[0]);
+		if (bit_mask(1, get_map(map, pc->size + 1)) == 3)
+		{
+			pc->reg[get_map(map, i - 1) - 1] = pc->arg[0];
+			(pc->arg[0] == 0) ? (pc->carry = 1)
+				: (pc->carry = 0);
+        }
+        else
+            pc->reg[get_map(map, i - 1) - 1] = lld_helper(map, pc);
 	}
 	pc->size += size_tmp;
 	pc->command = 0;

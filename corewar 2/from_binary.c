@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-unsigned int	take_arg(unsigned char *map, int size, int stand)
+unsigned int		take_arg(unsigned char *map, int size, int stand)
 {
 	int				i;
 	unsigned int	arr[size];
@@ -36,7 +36,7 @@ unsigned int	take_arg(unsigned char *map, int size, int stand)
 	return (tmp);
 }
 
-int				set_place(int place)
+int					set_place(int place)
 {
 	if (place >= MEM_SIZE)
 		return (set_place(place - MEM_SIZE));
@@ -45,7 +45,7 @@ int				set_place(int place)
 	return (place);
 }
 
-void			set_bit(t_pc *pc, int plc, unsigned char *map, unsigned int n)
+void				set_bit(int place, unsigned char *map, unsigned int number)
 {
 	int				i;
 	unsigned int	arr[4];
@@ -54,20 +54,20 @@ void			set_bit(t_pc *pc, int plc, unsigned char *map, unsigned int n)
 	i = 0;
 	while (i < 4)
 	{
-		arr[i] = n;
-		n = n >> 8;
+		arr[i] = number;
+		number = number >> 8;
 		i++;
 	}
 	k = 0;
-	pc->change = set_place(plc);
+	pc->change = set_place(place);
 	while (--i >= 0)
 	{
-		map[set_place(plc + k)] = arr[i];
+		map[set_place(place + k)] = arr[i];
 		k++;
 	}
 }
 
-int				find_weight(int arg, int cmd)
+int					find_weight(int arg, int cmd)
 {
 	if (arg == 3)
 		return (op_tab[cmd].label);

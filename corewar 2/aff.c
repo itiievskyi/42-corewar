@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and.c                                              :+:      :+:    :+:   */
+/*   aff.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 16:12:56 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 17:56:22 by averemiy         ###   ########.fr       */
+/*   Created: 2018/08/01 16:02:09 by averemiy          #+#    #+#             */
+/*   Updated: 2018/08/01 16:31:05 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		and(unsigned char *map, t_pc **pc1)
+void			aff(unsigned char *map, t_pc **pc1)
 {
-	int		jump;
-	t_pc	*pc;
-	int		i;
+	int			i;
+	t_pc		*pc;
+	int			tmp_size;
+	char		c;
 
 	pc = (*pc1);
-	if (!(c_c_and_or_xor(get_map(map, pc->size + 1))) &&
-			(i = red_arg(map, pc, 3)) != -1)
+	tmp_size = get_size(map, pc->command, pc->size);
+	if (!(c_c_aff(get_map(map, pc->size + 1))) &&
+			(i = red_arg(map, pc, 1) != -1))
 	{
-		jump = red_arg(map, pc, 2);
-		pc->reg[get_map(map, jump) - 1] = pc->arg[0] & pc->arg[1];
-		if (!(pc->arg[0] & pc->arg[1]))
-			pc->carry = 1;
-		else
-			pc->carry = 0;
+		c = pc->arg[0] % 256;
+		ft_putchar(c);
 	}
-	pc->size += get_size(map, pc->command, pc->size);
+	pc->size += tmp_size;
 	pc->command = 0;
 }

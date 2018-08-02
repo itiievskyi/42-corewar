@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/07 14:13:46 by averemiy          #+#    #+#             */
-/*   Updated: 2018/07/27 14:22:04 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/02 13:42:33 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "op.h"
-# include "print_ncurses.h"
 
 typedef struct			s_rule
 {
@@ -74,8 +73,8 @@ typedef struct			s_op
 void			get_command(unsigned char *map, t_pc *pc);
 int				check_cycle(int count, int j, int cycle, t_player *p);
 t_op			op_tab[17];
-void			set_bit(t_pc *pc, int plc, unsigned char *map, unsigned int n);
-void			print_map(unsigned char *map, t_pc *pc, t_player *p, int y);
+void			set_bit(int place, unsigned char *map, unsigned int number);
+void			print_map(unsigned char *map, t_pc *pc);
 void			solve(t_player *p, unsigned char *map, t_pc *pc_1);
 char			*ft_dec_to_binary(int tmp);
 int				bit_mask(int stand, int size);
@@ -119,37 +118,6 @@ int				try_to_read(t_player **p, char *str, int nbr);
 int				read_dump(t_rule *rule, char **argv, int argc, int i);
 t_pc			*create_pc(t_player *p);
 int				count_live(t_player *p, t_pc *pc, unsigned char *map);
-int				count_player(t_player *p);
-
-typedef struct		s_ncurse
-{
-	int				win;
-	int				players;
-	int				step;
-	int				proc;
-	int				pause;
-	int				debug;
-	char			**names;
-	int				sizes[4];
-	unsigned int	ids[4];
-	unsigned char	*tab;
-	int				*chng;
-}					t_ncurse;
-void				print_ncurses(t_ncurse *crwr, t_pc *pc);
-void				init_colors(void);
-void				print_template(int x, int y, t_ncurse *crwr);
-void				print_finish(t_ncurse *crwr, int i, char ch);
-void				print_field_start(t_ncurse *crwr, int i, int y, int x);
-void				print_help(void);
-void				print_music(t_ncurse *crwr);
-void				sighandler(int signum);
-void				print_check_buttons(t_ncurse *crwr, char ch);
-void				check_pause(t_ncurse *crwr, int pause, char ch, int *debug);
-void				step_by_step(int *debug);
-int					get_player(t_ncurse *crwr, t_pc *pc);
-void				print_changes(t_ncurse *crwr, t_pc *pc, int y, int x);
-void				print_ncurses_free(t_ncurse *crwr);
-void				check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd);
 
 #define BUF_SIZE 1
 #endif

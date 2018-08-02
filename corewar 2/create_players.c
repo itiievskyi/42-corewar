@@ -41,7 +41,7 @@ void			init_pc(t_pc **tmp, unsigned int parent, int stand)
 	}
 }
 
-int				count_player(t_player *p)
+static	int		count_player(t_player *p)
 {
 	int			i;
 
