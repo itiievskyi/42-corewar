@@ -18,7 +18,7 @@ int				count_live(t_player *p, t_pc *pc, unsigned char *map)
 
 	res = 0;
 	while (pc != NULL)
-	{	
+	{
 		if (get_map(map, pc->size) == 1)
 			res += 1;
 		pc = pc->next;
@@ -65,13 +65,15 @@ int			delete_one_pc(t_pc **pc)
 	t_pc	*cur;
 	t_pc	*pre;
 
-	if ((*pc)->live <= 0)
+	if (*pc && (*pc)->live <= 0)
 	{
 		tmp = (*pc);
 		*pc = (*pc)->next;
 		free(tmp);
 		return (1);
 	}
+	if (!(*pc))
+		return (0);
 	cur = (*pc)->next;
 	pre = (*pc);
 	while (cur != NULL && pre != NULL)
@@ -106,4 +108,3 @@ void		delete_pc(t_player *p, t_pc **pc_1)
 			break;
 	}
 }
-
