@@ -81,18 +81,18 @@ void		free_all(t_player *p, t_pc *pc)
 
 static int	print_usage(char **argv)
 {
-	ft_printf(CB_YELLOW "usage: %s ", argv[0]);
+	ft_printf(CB_YELLOW"usage: %s ", argv[0]);
 	ft_printf("[-v | -dump N] [-a] [-n N] <champion1.cor> <...>\n" C_RESET);
 	ft_printf(CB_GREEN "       -v\t" C_RESET);
-	ft_printf(": Enables visualization\n");
+	ft_printf(": Enables visualization\n" C_RESET);
 	ft_printf(CB_GREEN "       -dump N\t" C_RESET);
-	ft_printf(": Dumps memory after N cycles\n");
+	ft_printf(": Dumps memory after N cycles\n" C_RESET);
 	ft_printf(CB_GREEN "       -a\t" C_RESET);
-	ft_printf(": Prints output from 'aff' (Default is to hide it)\n");
+	ft_printf(": Prints output from 'aff' (Default is to hide it)\n" C_RESET);
 	ft_printf(CB_GREEN "       -n N\t" C_RESET);
-	ft_printf(": Assigns id N for the player specified right after N\n");
+	ft_printf(": Assigns id N to the player specified right after N\n" C_RESET);
 	ft_printf(CB_RED "Pay attention! " C_RESET);
-	ft_printf("[-v] has higher priority when is used with [-dump]\n");
+	ft_printf("[-v] has higher priority when is used with [-dump]\n" C_RESET);
 	exit(1);
 }
 
