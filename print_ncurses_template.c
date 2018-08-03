@@ -103,8 +103,8 @@ static void	print_misc(t_ncurse *crwr)
 	i = -1;
 	while (++i < 4)
 	{
-		mvprintw(9 + 6 * i, 230, "last_live: %-5d", 0);
-		mvprintw(11 + 6 * i, 230, "p_live: %-5d", 0);
+		mvprintw(9 + 6 * i, 230, "Last live: %-5d", 0);
+		mvprintw(11 + 6 * i, 230, "Period lives: %-5d", 0);
 	}
 	attron(COLOR_PAIR(5) | A_BOLD);
 	mvaddstr(39 - 1, 202, "Cycle : ");
