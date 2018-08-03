@@ -40,7 +40,7 @@ void		print_music(t_ncurse *crwr)
 				then\n\
 				pkill -9 afplay & \n\
 				else \n\
-				afplay music.mp3 & \n\
+				afplay ./VM/music.mp3 & \n\
 				fi");
 	}
 	else if (crwr->win)

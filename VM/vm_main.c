@@ -120,6 +120,6 @@ int			main(int argc, char **argv)
 		rule->check_dump = 0;
 	put_in_map(p, map);
 	solve(p, map, pc, rule);
-	system("leaks crwr");
+	system("leaks corewar");
 	return (0);
 }
