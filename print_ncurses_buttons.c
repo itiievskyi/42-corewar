@@ -16,6 +16,7 @@ static void	button_action(t_ncurse *crwr, char ch, int *debug)
 {
 	static int	pause;
 
+	crwr->pause != 0 ? pause = crwr->pause : pause;
 	if (ch == '+' && pause < 4)
 		pause += 1;
 	else if (ch == '-' && pause > -5)
@@ -24,6 +25,8 @@ static void	button_action(t_ncurse *crwr, char ch, int *debug)
 		print_help();
 	else if (ch == 's' || ch == 'S')
 		*debug = 1;
+	else if (ch == 'm' || ch == 'M')
+		print_music(crwr);
 	if (*debug == 1)
 	{
 		attron(COLOR_PAIR(7) | A_BOLD);
@@ -65,18 +68,30 @@ void		check_pause(t_ncurse *crwr, int pause, char ch, int *debug)
 	}
 }
 
-void		step_by_step(int *debug)
+void		step_by_step(int *debug, t_ncurse *crwr)
 {
-	char	ch;
+	char		ch;
+	char		*pause;
 
 	ch = '\0';
+	pause = (char*)malloc(sizeof(char) * 2);
+	mvinnstr(36, 235, pause, 2);
+	crwr->pause = ft_atoi(pause);
+	mvprintw(37 - 1, 235,"% 2d", crwr->pause);
 	if (*debug == 1)
 	{
 		halfdelay(10000);
 		while (ch != 's' && ch != ' ' && ch != 'S')
+		{
 			if ((ch = getch()) == 'h' || ch == 'H')
 				print_help();
+			else if (ch == '+' && crwr->pause < 4 && (crwr->pause += 1) < 100)
+				mvprintw(37 - 1, 235,"% 2d", crwr->pause);
+			else if (ch == '-' && crwr->pause > -5 && (crwr->pause -= 1) < 100)
+				mvprintw(37 - 1, 235,"% 2d", crwr->pause);
+		}
 		if (ch == ' ')
 			*debug = 0;
 	}
+	free(pause);
 }
