@@ -149,7 +149,7 @@ void			game_over(t_player *p, t_pc *pc, unsigned char *map, t_rule *r)
 			p_win = p;
 		p = p->next;
 	}
-	p_win->last_live = 2147483648;
+	p_win->last_live = 2147483647;
 	print_map(map, pc, p_win, r);
 	free_all(p1, pc);
 }
