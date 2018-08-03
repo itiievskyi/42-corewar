@@ -77,7 +77,7 @@ void		step_by_step(int *debug, t_ncurse *crwr)
 	pause = (char*)malloc(sizeof(char) * 2);
 	mvinnstr(36, 235, pause, 2);
 	crwr->pause = ft_atoi(pause);
-	mvprintw(37 - 1, 235,"% 2d", crwr->pause);
+	mvprintw(37 - 1, 235, "% 2d", crwr->pause);
 	if (*debug == 1)
 	{
 		halfdelay(10000);
@@ -86,9 +86,9 @@ void		step_by_step(int *debug, t_ncurse *crwr)
 			if ((ch = getch()) == 'h' || ch == 'H')
 				print_help(crwr);
 			else if (ch == '+' && crwr->pause < 4 && (crwr->pause += 1) < 100)
-				mvprintw(37 - 1, 235,"% 2d", crwr->pause);
+				mvprintw(37 - 1, 235, "% 2d", crwr->pause);
 			else if (ch == '-' && crwr->pause > -5 && (crwr->pause -= 1) < 100)
-				mvprintw(37 - 1, 235,"% 2d", crwr->pause);
+				mvprintw(37 - 1, 235, "% 2d", crwr->pause);
 		}
 		if (ch == ' ')
 			*debug = 0;

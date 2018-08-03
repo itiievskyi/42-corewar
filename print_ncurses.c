@@ -24,7 +24,7 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 		return ;
 	}
 	else
-		print_changes(crwr, pc, 9, 4);
+		print_changes(crwr, pc);
 	mvprintw(38, 239, "%-6d", crwr->proc);
 }
 
@@ -39,7 +39,6 @@ void		print_ncurses(t_ncurse *crwr, t_pc *pc)
 	nodelay(stdscr, TRUE);
 	if (!crwr->step)
 	{
-		print_music(crwr);
 		signal(SIGINT, sighandler);
 		setlocale(LC_ALL, "en_US.UTF-8");
 		initscr();

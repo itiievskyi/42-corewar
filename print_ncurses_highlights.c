@@ -12,6 +12,28 @@
 
 #include "vm.h"
 
+static void	highlight_off(t_ncurse *crwr, int s[], int i)
+{
+	int		x;
+	int		y;
+
+	x = 4;
+	y = 9;
+	if (crwr->chng[i] == 0)
+	{
+		attron(COLOR_PAIR(2));
+		mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
+		attroff(COLOR_PAIR(2));
+	}
+	else
+	{
+		attron(COLOR_PAIR(crwr->chng[i]));
+		mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
+		attroff(COLOR_PAIR(crwr->chng[i]));
+	}
+	s[i] = 0;
+}
+
 static void	print_highlights(t_ncurse *crwr, int s[], int x, int y)
 {
 	int		i;
@@ -33,21 +55,7 @@ static void	print_highlights(t_ncurse *crwr, int s[], int x, int y)
 				s[i] *= -1;
 		}
 		else if (s[i] < 0)
-		{
-			if (crwr->chng[i] == 0)
-			{
-				attron(COLOR_PAIR(2));
-				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
-				attroff(COLOR_PAIR(2));
-			}
-			else
-			{
-				attron(COLOR_PAIR(crwr->chng[i]));
-				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X", crwr->tab[i]);
-				attroff(COLOR_PAIR(crwr->chng[i]));
-			}
-			s[i] = 0;
-		}
+			highlight_off(crwr, s, i);
 	}
 }
 

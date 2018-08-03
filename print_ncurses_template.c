@@ -96,7 +96,7 @@ static void	print_players(t_ncurse *crwr, int i, int len)
 	}
 }
 
-void		print_misc(void)
+static void	print_misc(t_ncurse *crwr)
 {
 	int i;
 
@@ -119,6 +119,7 @@ void		print_misc(void)
 	mvaddstr(67, 202, "Press '+' or '-' to change the speed");
 	mvaddstr(63, 202, "Press 's' to manage with DEBUG mod");
 	attroff(COLOR_PAIR(40) | A_BOLD);
+	print_music(crwr);
 }
 
 void		print_template(int x, int y, t_ncurse *crwr)
@@ -147,5 +148,5 @@ void		print_template(int x, int y, t_ncurse *crwr)
 		mvprintw(y, x++, "*");
 	print_header();
 	print_players(crwr, -1, 0);
-	print_misc();
+	print_misc(crwr);
 }

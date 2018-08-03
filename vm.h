@@ -149,7 +149,7 @@ void				check_pause(t_ncurse *crwr, int pause, char ch, int *debug);
 void				step_by_step(int *debug, t_ncurse *crwr);
 int					get_player(t_ncurse *crwr, t_pc *pc);
 int					get_player_byid(t_ncurse *crwr, int id);
-void				print_changes(t_ncurse *crwr, t_pc *pc, int y, int x);
+void				print_changes(t_ncurse *crwr, t_pc *pc);
 void				print_ncurses_free(t_ncurse *crwr);
 void				check_highlites(t_ncurse *crwr, t_pc *temp, char *cmd);
 void				print_players_lives(t_player *p);

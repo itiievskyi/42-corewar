@@ -25,7 +25,22 @@ void		print_players_lives(t_player *p)
 	}
 }
 
-void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
+static void	write_changes(t_ncurse *crwr, t_pc *temp, int i)
+{
+	int		x;
+	int		y;
+
+	x = 4;
+	y = 9;
+	mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X ", crwr->tab[i]);
+	if (get_player(crwr, temp) > 0)
+	{
+		crwr->chng[i] = 10 * get_player(crwr, temp);
+		check_highlites(crwr, temp, "write_change");
+	}
+}
+
+void		print_changes(t_ncurse *crwr, t_pc *pc)
 {
 	int		i;
 	int		j;
@@ -43,12 +58,7 @@ void		print_changes(t_ncurse *crwr, t_pc *pc, int y, int x)
 			while (++j < 4)
 			{
 				i = (temp->change + j) % 4096;
-				mvprintw(y + i / 64, (x + (i % 64 * 3)), "%.2X ", crwr->tab[i]);
-				if (get_player(crwr, temp) > 0)
-				{
-					crwr->chng[i] = 10 * get_player(crwr, temp);
-					check_highlites(crwr, temp, "write_change");
-				}
+				write_changes(crwr, temp, i);
 			}
 			temp->change = -1;
 		}
@@ -64,9 +74,8 @@ void		print_field_start(t_ncurse *crwr, int i, int y, int x)
 	int		p;
 
 	p = 1;
-	while (i < 4096 && crwr)
+	while (i < 4096 && crwr && (x = 4))
 	{
-		x = 4;
 		while (x < 195)
 		{
 			if (i >= (4096 / crwr->players * p))
