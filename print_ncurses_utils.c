@@ -33,12 +33,13 @@ void		init_colors(void)
 
 void		print_music(t_ncurse *crwr)
 {
-	if (!crwr->step)
+	if (!crwr->win)
 	{
 		system("#!/bin/sh\n\
-				if ! pkill -0 -x 'afplay' 2>/dev/null \
-				-o pkill -0 -x  'crwr' 2>/dev/null \n\
+				if pkill -0 -x 'afplay' 2>/dev/null \n\
 				then\n\
+				pkill -9 afplay & \n\
+				else \n\
 				afplay music.mp3 & \n\
 				fi");
 	}

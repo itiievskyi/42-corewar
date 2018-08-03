@@ -22,7 +22,7 @@ static void	button_action(t_ncurse *crwr, char ch, int *debug)
 	else if (ch == '-' && pause > -5)
 		pause -= 1;
 	else if (ch == 'h' || ch == 'H')
-		print_help();
+		print_help(crwr);
 	else if (ch == 's' || ch == 'S')
 		*debug = 1;
 	else if (ch == 'm' || ch == 'M')
@@ -84,7 +84,7 @@ void		step_by_step(int *debug, t_ncurse *crwr)
 		while (ch != 's' && ch != ' ' && ch != 'S')
 		{
 			if ((ch = getch()) == 'h' || ch == 'H')
-				print_help();
+				print_help(crwr);
 			else if (ch == '+' && crwr->pause < 4 && (crwr->pause += 1) < 100)
 				mvprintw(37 - 1, 235,"% 2d", crwr->pause);
 			else if (ch == '-' && crwr->pause > -5 && (crwr->pause -= 1) < 100)

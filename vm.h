@@ -141,7 +141,7 @@ void				init_colors(void);
 void				print_template(int x, int y, t_ncurse *crwr);
 void				print_finish(t_ncurse *crwr, int i, char ch);
 void				print_field_start(t_ncurse *crwr, int i, int y, int x);
-void				print_help(void);
+void				print_help(t_ncurse *crwr);
 void				print_music(t_ncurse *crwr);
 void				sighandler(int signum);
 void				print_check_buttons(t_ncurse *crwr, char ch);

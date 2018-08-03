@@ -65,7 +65,7 @@ static void	init_win(WINDOW **win)
 	print_manual_text(win);
 }
 
-void		print_help(void)
+void		print_help(t_ncurse *crwr)
 {
 	int				ch;
 	WINDOW			*help_win;
@@ -77,6 +77,8 @@ void		print_help(void)
 	doupdate();
 	while ((ch = getch()) != 'h' && ch != 'H')
 	{
+		if (ch == 'm' || ch == 'M')
+			print_music(crwr);
 		update_panels();
 		doupdate();
 		ch = '\0';
