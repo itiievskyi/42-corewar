@@ -27,7 +27,11 @@ typedef struct			s_rule
 {
 	int					aff;
 	int					visual;
-	int					dump;
+	unsigned int		dump;
+	int					i;
+	int					c;
+	int					j;
+	int					check_dump;
 }						t_rule;
 
 typedef struct			s_player
@@ -52,8 +56,10 @@ typedef struct			s_pc
 	int					live;
 	int					command;
 	int					cicles;
+	int					left_live;
 	int					size;
 	unsigned int		arg[3];
+	int					aff;
 	struct s_pc			*next;
 	int					change;
 }						t_pc;
@@ -71,12 +77,13 @@ typedef struct			s_op
 	int					label;
 }						t_op;
 
+void			free_all(t_player *p, t_pc *pc);
 void			get_command(unsigned char *map, t_pc *pc);
 int				check_cycle(int count, int j, int cycle, t_player *p);
 t_op			op_tab[17];
 void			set_bit(t_pc *pc, int plc, unsigned char *map, unsigned int n);
-void			print_map(unsigned char *map, t_pc *pc, t_player *p, int y);
-void			solve(t_player *p, unsigned char *map, t_pc *pc_1);
+void			print_map(unsigned char *map, t_pc *pc, t_player *p, t_rule *r);
+void			solve(t_player *p, unsigned char *map, t_pc *pc_1, t_rule *r);
 char			*ft_dec_to_binary(int tmp);
 int				bit_mask(int stand, int size);
 int				find_weight(int stand, int cmd);
@@ -117,9 +124,10 @@ int				c_c_aff(int codage);
 int				create_with_number(t_player **p, int size, int i, char **argv);
 int				try_to_read(t_player **p, char *str, int nbr);
 int				read_dump(t_rule *rule, char **argv, int argc, int i);
-t_pc			*create_pc(t_player *p);
+t_pc			*create_pc(t_player *p, t_rule *r);
 int				count_live(t_player *p, t_pc *pc, unsigned char *map);
 int				count_player(t_player *p);
+void			game_over(t_player *p, t_pc *pc, unsigned char *map, t_rule *r);
 
 typedef struct		s_ncurse
 {
@@ -127,6 +135,7 @@ typedef struct		s_ncurse
 	int				players;
 	int				step;
 	int				proc;
+	int				to_die;
 	int				pause;
 	int				debug;
 	int				music;

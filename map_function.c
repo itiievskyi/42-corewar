@@ -32,13 +32,13 @@ int				yes(t_pc *pc, int i)
 	return (0);
 }
 
-void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
+void	print_map(unsigned char *map, t_pc *pc, t_player *p, t_rule *r)
 {
 	int				i;
 	static t_ncurse	*crwr;
 
 	p->last_live == 2147483648 ? 0 : print_players_lives(p);
-	if (y == 0)
+	if (r->i - 1 == 0)
 	{
 		i = -1;
 		crwr = (t_ncurse*)malloc(sizeof(t_ncurse));
@@ -52,10 +52,10 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, int y)
 			p = p->next;
 		}
 	}
-	if (p)
+	if ((crwr->to_die = r->c) > -100 && p)
 		p->last_live == 2147483648 ?
 		crwr->win = get_player_byid(crwr, p->p_id) : 0;
-	crwr->step = y;
+	crwr->step = r->i - 1;
 	crwr->pause = 0;
 	crwr->tab = map;
 	print_ncurses(crwr, pc);

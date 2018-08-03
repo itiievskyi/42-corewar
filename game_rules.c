@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:07:55 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/02 14:25:37 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/02 21:20:48 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int				count_live(t_player *p, t_pc *pc, unsigned char *map)
 	int			res;
 
 	res = 0;
+	if (map) {};
 	while (pc != NULL)
 	{
-		if (get_map(map, pc->size) == 1)
-			res += 1;
+		res += pc->left_live;
 		pc = pc->next;
 	}
 	while (p != NULL)
@@ -55,6 +55,7 @@ void		minus_live(t_pc *pc)
 	while (pc != NULL)
 	{
 		pc->live--;
+		pc->left_live = 0;
 		pc = pc->next;
 	}
 }

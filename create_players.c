@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 13:17:01 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:32:26 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 14:04:14 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				count_player(t_player *p)
 	return (i);
 }
 
-t_pc			*create_pc(t_player *p)
+t_pc			*create_pc(t_player *p, t_rule *r)
 {
 	int			i;
 	int			j;
@@ -72,8 +72,10 @@ t_pc			*create_pc(t_player *p)
 	{
 		p->stand = (j * (del / i));
 		init_pc(&pc, p->p_id, ((j * (del / i))));
-		pc->change = -1;
 		p = p->next;
 	}
+	pc->change = -1;
+	pc->left_live = 0;
+	(r->aff == 1) ? (pc->aff = 1) : (pc->aff = 0);
 	return (pc);
 }

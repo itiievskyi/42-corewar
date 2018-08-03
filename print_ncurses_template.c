@@ -109,7 +109,7 @@ static void	print_misc(t_ncurse *crwr)
 	attron(COLOR_PAIR(5) | A_BOLD);
 	mvaddstr(39 - 1, 202, "Cycle : ");
 	mvaddstr(39 - 1, 227, "Processes : ");
-	mvprintw(41 - 1, 202, "CYCLE_TO_DIE : %d", CYCLE_TO_DIE);
+	mvprintw(41 - 1, 202, "CYCLE_TO_DIE : %-4d", crwr->to_die);
 	mvprintw(41 - 1, 227, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvprintw(43 - 1, 202, "NBR_LIVE : %d", NBR_LIVE);
 	mvprintw(43 - 1, 227, "MAX_CHECKS : %d", MAX_CHECKS);

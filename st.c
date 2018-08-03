@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 12:39:46 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:56:46 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/02 20:46:22 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ void		st(unsigned char *map, t_pc **pc1)
 			(i = red_arg(map, pc, 2)) != -1)
 	{
 		if (bit_mask(2, get_map(map, pc->size + 1)) == 1)
-		{
-			if (get_map(map, pc->size + 2) >= 1
-					&& get_map(map, pc->size + 2) <= 16)
-				pc->reg[get_map(map, pc->size + 2) - 1] = pc->arg[0];
-		}
+				pc->reg[get_map(map, pc->size + 3) - 1] = pc->arg[0];
 		else
 		{
 			j = (short)take_arg(map, 2, pc->size + 3);

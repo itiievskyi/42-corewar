@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 16:02:09 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 16:31:05 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 13:59:43 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			aff(unsigned char *map, t_pc **pc1)
 	pc = (*pc1);
 	tmp_size = get_size(map, pc->command, pc->size);
 	if (!(c_c_aff(get_map(map, pc->size + 1))) &&
-			(i = red_arg(map, pc, 1) != -1))
+			(i = red_arg(map, pc, 1) != -1) && pc->aff == 1)
 	{
 		c = pc->arg[0] % 256;
 		ft_putchar(c);

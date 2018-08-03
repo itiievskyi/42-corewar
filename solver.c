@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 09:55:23 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/02 13:42:51 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 14:40:34 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ void		do_all(t_player *p, unsigned char *map, t_pc **pc_1, void (**functions)(un
 	}
 }
 
-void		game_minus_cicle(int *j, int *cycle_to_die)
+void		game_minus_cicle(t_rule *r)
 {
-	*cycle_to_die -= CYCLE_DELTA;
-	*j = 0;
+	r->c -= CYCLE_DELTA;
+	r->j = 0;
 }
 
 void		add_i(t_player *p, int i)
@@ -136,11 +136,13 @@ void		add_i(t_player *p, int i)
 	}
 }
 
-void			game_over(t_player *p, t_pc *pc, unsigned char *map, int i)
+void			game_over(t_player *p, t_pc *pc, unsigned char *map, t_rule *r)
 {
 	t_player	*p_win;
+	t_player	*p1;
 
 	p_win = p;
+	p1 = p;
 	while (p != NULL)
 	{
 		if (p->last_live > p_win->last_live)
@@ -148,34 +150,86 @@ void			game_over(t_player *p, t_pc *pc, unsigned char *map, int i)
 		p = p->next;
 	}
 	p_win->last_live = 2147483648;
-	print_map(map, pc, p_win, i - 1);
+	print_map(map, pc, p_win, r);
+	free_all(p1, pc);
 }
 
-void		solve(t_player *p, unsigned char *map, t_pc *pc_1)
+void		print_dump(t_player *p, unsigned char *map, t_pc *pc)
 {
-	void		(*functions[17])(unsigned char *, t_pc **);
-	int			c;
-	int			j;
-	int			i;
+	t_player *p1;
+	int		j;
+	int		i;
 
-	c = CYCLE_TO_DIE;
-	init_function(functions);
 	j = 0;
 	i = 0;
-	while (1 && ++j > -1 && ++i > -1)
+	p1 = p;
+	ft_printf("Introducting contestants ...\n");
+	while (p1 != NULL && j++)
 	{
-		add_i(p, i);
-		do_all(p, map, &pc_1, functions);
-		if (j / c == MAX_CHECKS ||
-				!(j = check_cycle(count_live(p, pc_1, map), j, c, p)))
-			game_minus_cicle(&j, &c);
-		if (j % c == 0)
-			delete_pc(p, &pc_1);
-		if (c <= 0 || pc_1 == NULL)
+		ft_printf("* Player %d, weighing %d, %s (%s) !\n", \
+				j, p1->p_size, p1->p_name, p1->p_comment);
+		p1 = p1->next;
+	}
+	ft_printf("0x0000 : ");
+	while (++i <= MEM_SIZE)
+	{
+		ft_printf("%02x ", map[i - 1]);
+		if (i % 64 == 0 && i != 0 )
 		{
-			game_over(p, pc_1, map, i);
+			ft_printf("\n");
+			(i < MEM_SIZE) ? ft_printf("0x%04x : ", i) : 0;
+		}
+	}
+	free_all(p, pc);
+}
+
+void		p_win(t_player *p, t_pc *pc)
+{
+	t_player 	*p1;
+	t_player 	*win;
+
+	p1 = p;
+	while (p1 != NULL)
+	{
+		ft_printf("%s (%d)\n", p1->p_name, p1->p_id);
+		p1 = p1->next;
+	}
+	win = p;
+	p1 = p;
+	while (p != NULL)
+	{
+		if (p->last_live > win->last_live)
+			win = p;
+		p = p->next;
+	}
+	ft_printf("Win %s (%d)\n", win->p_name, win->p_id);
+	free_all(p1, pc);
+}
+void		solve(t_player *p, unsigned char *map, t_pc *pc_1, t_rule *r)
+{
+	void		(*functions[17])(unsigned char *, t_pc **);
+
+	init_function(functions);
+	while (1 && (++(r->j)) > -1 && (++(r->i)) > -1)
+	{
+		add_i(p, r->i);
+		do_all(p, map, &pc_1, functions);
+		if (r->j / r->c == MAX_CHECKS ||
+				!(r->j = check_cycle(count_live(p, pc_1, map), r->j, r->c, p)))
+			game_minus_cicle(r);
+		if (r->j % r->c == 0)
+			delete_pc(p, &pc_1);
+		if (r->c <= 0 || !pc_1)
+		{
+			(r->visual) ? game_over(p, pc_1, map, r) : p_win(p, pc_1);
 			break;
 		}
-		print_map(map, pc_1, p, i - 1);
+		if (r->visual)
+			print_map(map, pc_1, p, r);
+		if (r->check_dump == 1 && !r->visual && r->dump == (unsigned int)r->i)
+		{
+			print_dump(p, map, pc_1);
+			break ;
+		}
 	}
 }

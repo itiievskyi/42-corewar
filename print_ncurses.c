@@ -26,6 +26,8 @@ static void	to_buffer(t_ncurse *crwr, t_pc *pc)
 	else
 		print_changes(crwr, pc);
 	mvprintw(38, 239, "%-6d", crwr->proc);
+	mvprintw(41 - 1, 202, "CYCLE_TO_DIE : %-4d",
+		crwr->to_die >= 0 ? crwr->to_die : 0);
 }
 
 void		print_ncurses(t_ncurse *crwr, t_pc *pc)

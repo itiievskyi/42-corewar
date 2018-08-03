@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:23:49 by averemiy          #+#    #+#             */
-/*   Updated: 2018/07/31 15:13:23 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 13:00:04 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int static		had_letter(char *str)
 
 int			read_dump(t_rule *rule, char **argv, int argc, int i)
 {
+	rule->check_dump = 1;
 	if (i + 1 > argc || had_letter(argv[i + 1]))
 		return (1);
 	else

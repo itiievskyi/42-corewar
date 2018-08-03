@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:23:42 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 19:04:19 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 12:59:44 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int					read_size(unsigned int *size)
 		res = res << (j * 8);
 		i++;
 	}
+	free(size);
 	return (res);
 }
 
