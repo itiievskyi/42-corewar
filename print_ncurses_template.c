@@ -113,9 +113,10 @@ static void	print_misc(t_ncurse *crwr)
 	mvprintw(41 - 1, 227, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	mvprintw(43 - 1, 202, "NBR_LIVE : %d", NBR_LIVE);
 	mvprintw(43 - 1, 227, "MAX_CHECKS : %d", MAX_CHECKS);
+	mvprintw(38, 239, "%-6d", crwr->proc);
 	attroff(COLOR_PAIR(5) | A_BOLD);
 	attron(COLOR_PAIR(40) | A_BOLD);
-	mvaddstr(65, 202, "Press 'h' to toggle Help, 'm' to toggle music");
+	mvaddstr(65, 202, "Press 'h' to toggle Help, 'm' to toggle music ♫");
 	mvaddstr(67, 202, "Press '+' or '-' to change the speed");
 	mvaddstr(63, 202, "Press 's' to manage with DEBUG mod");
 	attroff(COLOR_PAIR(40) | A_BOLD);
