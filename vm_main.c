@@ -44,7 +44,7 @@ int			pars(char **argv, int argc, t_player **p, t_rule *rule)
 	return (0);
 }
 
-void	init_rule(t_rule *rule)
+void		init_rule(t_rule *rule)
 {
 	rule->visual = 0;
 	rule->dump = 0;
@@ -54,7 +54,7 @@ void	init_rule(t_rule *rule)
 	rule->j = 0;
 }
 
-void	free_all(t_player *p, t_pc *pc)
+void		free_all(t_player *p, t_pc *pc)
 {
 	t_player *p1;
 	t_pc *pc1;
@@ -79,7 +79,24 @@ void	free_all(t_player *p, t_pc *pc)
 	}
 }
 
-int		main(int argc, char **argv)
+static int	print_usage(char **argv)
+{
+	ft_printf(CB_YELLOW "usage: %s ", argv[0]);
+	ft_printf("[-v | -dump N] [-a] [-n N] <champion1.cor> <...>\n" C_RESET);
+	ft_printf(CB_GREEN "       -v\t" C_RESET);
+	ft_printf(": Enables visualization\n");
+	ft_printf(CB_GREEN "       -dump N\t" C_RESET);
+	ft_printf(": Dumps memory after N cycles\n");
+	ft_printf(CB_GREEN "       -a\t" C_RESET);
+	ft_printf(": Prints output from 'aff' (Default is to hide it)\n");
+	ft_printf(CB_GREEN "       -n N\t" C_RESET);
+	ft_printf(": Assigns id N for the player specified right after N\n");
+	ft_printf(CB_RED "Pay attention! " C_RESET);
+	ft_printf("[-v] has higher priority when is used with [-dump]\n");
+	exit(1);
+}
+
+int			main(int argc, char **argv)
 {
 	unsigned char map[MEM_SIZE];
 	int i;
@@ -90,6 +107,7 @@ int		main(int argc, char **argv)
 	i = 0;
 	p = NULL;
 	pc = NULL;
+	argc == 1 ? print_usage(argv) : 0;
 	rule = (t_rule *)malloc(sizeof(t_rule));
 	init_rule(rule);
 	while (++i < MEM_SIZE)
