@@ -125,7 +125,7 @@ int				create_with_number(t_player **p, int size, int i, char **argv);
 int				try_to_read(t_player **p, char *str, int nbr);
 int				read_dump(t_rule *rule, char **argv, int argc, int i);
 t_pc			*create_pc(t_player *p, t_rule *r);
-int				count_live(t_player *p, t_pc *pc, unsigned char *map);
+int				count_live(t_player *p, t_pc *pc);
 int				count_player(t_player *p);
 void			game_over(t_player *p, t_pc *pc, unsigned char *map, t_rule *r);
 

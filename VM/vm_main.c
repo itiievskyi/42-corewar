@@ -12,8 +12,6 @@
 
 #include "vm.h"
 
-
-
 int			pars(char **argv, int argc, t_player **p, t_rule *rule)
 {
 	int		i;
@@ -35,7 +33,7 @@ int			pars(char **argv, int argc, t_player **p, t_rule *rule)
 		{
 			if (read_dump(rule, argv, argc - 1, i))
 				return (1);
-			i += 2;
+			i += 1;
 		}
 		else
 			if (try_to_read(p, argv[i], j--))

@@ -6,18 +6,17 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:07:55 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/02 21:20:48 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 16:51:40 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int				count_live(t_player *p, t_pc *pc, unsigned char *map)
+int				count_live(t_player *p, t_pc *pc)
 {
 	int			res;
 
 	res = 0;
-	if (map) {};
 	while (pc != NULL)
 	{
 		res += pc->left_live;
@@ -28,6 +27,7 @@ int				count_live(t_player *p, t_pc *pc, unsigned char *map)
 		res += p->p_live;
 		p = p->next;
 	}
+	//printf("res = %d\n", res);
 	return (res);
 }
 
@@ -54,8 +54,8 @@ void		minus_live(t_pc *pc)
 {
 	while (pc != NULL)
 	{
-		pc->live--;
 		pc->left_live = 0;
+		pc->live--;
 		pc = pc->next;
 	}
 }

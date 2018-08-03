@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 17:23:12 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 14:01:31 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 16:28:53 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		copy_pc(t_pc *pc1, t_pc *pc2, int stand, unsigned char *map)
 	pc1->cicles = 0;
 	pc1->command = 0;
 	pc1->change = -1;
+	pc1->left_live = 0;
 	pc1->aff = pc2->aff;
 	pc2->size += get_size(map, pc2->command, pc2->size);
 	pc2->command = 0;

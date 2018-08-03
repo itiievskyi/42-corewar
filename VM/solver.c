@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 09:55:23 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 14:40:34 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/03 19:35:47 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void		p_win(t_player *p, t_pc *pc)
 	ft_printf("Win %s (%d)\n", win->p_name, win->p_id);
 	free_all(p1, pc);
 }
+
 void		solve(t_player *p, unsigned char *map, t_pc *pc_1, t_rule *r)
 {
 	void		(*functions[17])(unsigned char *, t_pc **);
@@ -212,10 +213,11 @@ void		solve(t_player *p, unsigned char *map, t_pc *pc_1, t_rule *r)
 	init_function(functions);
 	while (1 && (++(r->j)) > -1 && (++(r->i)) > -1)
 	{
+		//printf("i= %d\nj = %d\nc = %d\n", r->i, r->j, r->c);
 		add_i(p, r->i);
 		do_all(p, map, &pc_1, functions);
 		if (r->j / r->c == MAX_CHECKS ||
-				!(r->j = check_cycle(count_live(p, pc_1, map), r->j, r->c, p)))
+				!(r->j = check_cycle(count_live(p, pc_1), r->j, r->c, p)))
 			game_minus_cicle(r);
 		if (r->j % r->c == 0)
 			delete_pc(p, &pc_1);
@@ -225,6 +227,9 @@ void		solve(t_player *p, unsigned char *map, t_pc *pc_1, t_rule *r)
 			break;
 		}
 		if (r->visual)
+		//	r->visual++;
+		//if (r->i >= 100)
+		//	break;
 			print_map(map, pc_1, p, r);
 		if (r->check_dump == 1 && !r->visual && r->dump == (unsigned int)r->i)
 		{
