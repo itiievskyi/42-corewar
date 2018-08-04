@@ -97,7 +97,8 @@ int						get_map(unsigned char *map, int coord);
 int						take_bit(t_pc *pc, int number, int arg);
 int						red_arg(unsigned char *map, t_pc *pc, int size);
 void					sti(unsigned char *map, t_pc **pc);
-void					put_in_map(t_player *p, unsigned char *map, t_rule *rule);
+void					put_in_map(t_player *p, unsigned char *map,
+							t_rule *rule);
 void					zjmp(unsigned char *map, t_pc **pc);
 void					live(unsigned char *map, t_player *p, t_pc *pc);
 void					and(unsigned char *map, t_pc **pc);

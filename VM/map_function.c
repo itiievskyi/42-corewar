@@ -71,7 +71,7 @@ void				put_in_map(t_player *p, unsigned char *map, t_rule *rule)
 	p1 = p;
 	if (rule->visual == 0 && (i = 1) == 1)
 	{
-			ft_printf("Introducting contestants ...\n");
+		ft_printf("Introducting contestants ...\n");
 		while (p1 != NULL)
 		{
 			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", \

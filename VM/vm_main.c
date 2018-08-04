@@ -51,7 +51,7 @@ void		init_rule(t_rule *rule)
 	rule->id = 0;
 }
 
-void			free_all(t_player *p, t_pc *pc, t_rule *rule)
+void		free_all(t_player *p, t_pc *pc, t_rule *rule)
 {
 	t_player	*p1;
 	t_pc		*pc1;
@@ -97,11 +97,11 @@ static int	print_usage(char **argv)
 
 int			main(int argc, char **argv)
 {
-	unsigned char map[MEM_SIZE];
-	int i;
-	t_rule *rule;
-	t_player *p;
-	t_pc *pc;
+	unsigned char	map[MEM_SIZE];
+	int				i;
+	t_rule			*rule;
+	t_player		*p;
+	t_pc			*pc;
 
 	i = 0;
 	p = NULL;
@@ -121,6 +121,5 @@ int			main(int argc, char **argv)
 		return (error_vm(p, pc, rule));
 	put_in_map(p, map, rule);
 	solve(p, map, pc, rule);
-	system("leaks corewar");
 	return (0);
 }

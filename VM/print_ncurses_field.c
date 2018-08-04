@@ -20,7 +20,8 @@ void		print_players_lives(t_player *p)
 	while (p && ++i < 4)
 	{
 		mvprintw(9 + 6 * i, 230, "Last live: %-7d", p->last_live);
-		mvprintw(11 + 6 * i, 230, "Period lives: %-6d", p->p_live);
+		if (p->p_live >= 0)
+			mvprintw(11 + 6 * i, 230, "Period lives: %-6d", p->p_live);
 		p = p->next;
 	}
 }

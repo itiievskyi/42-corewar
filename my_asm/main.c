@@ -76,6 +76,5 @@ int			main(int ac, char **av)
 		print_usage();
 	else if (g_a)
 		flag_a(a);
-	system("leaks -quiet asm");
 	return (0);
 }

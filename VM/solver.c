@@ -91,7 +91,7 @@ void			p_win(t_player *p, t_pc *pc, t_rule *r)
 				(0);
 		p = p->next;
 	}
-	ft_printf("Contestant %d, \"%s\", has won !\n",contestant(win, p1),
+	ft_printf("Contestant %d, \"%s\", has won !\n", contestant(win, p1),
 			win->p_name, win->p_id);
 	free_all(p1, pc, r);
 }

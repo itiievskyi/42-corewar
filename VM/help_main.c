@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 22:55:57 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/04 06:31:23 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 12:35:34 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,24 @@ void		add_i(t_player *p, int i)
 
 int			check_size(t_player *p)
 {
+	t_player	*p1;
+	t_player	*p2;
+
+	p1 = p;
+	while (p1 != NULL)
+	{
+		p2 = p1->next;
+		while (p2 != NULL)
+		{
+			if (p1->p_id == p2->p_id)
+				return (1);
+			p2 = p2->next;
+		}
+		p1 = p1->next;
+	}
 	while (p != NULL)
 	{
+		p->p_live = 0;
 		p->pc_id = -1;
 		if (p->p_size > CHAMP_MAX_SIZE)
 			return (1);
