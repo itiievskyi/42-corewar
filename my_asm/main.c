@@ -6,7 +6,7 @@
 /*   By: mshkliai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 11:16:08 by mshkliai          #+#    #+#             */
-/*   Updated: 2018/08/02 16:39:27 by mshkliai         ###   ########.fr       */
+/*   Updated: 2018/08/04 10:54:45 by mshkliai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int			main(int ac, char **av)
 		print_usage();
 	else if (g_a)
 		flag_a(a);
+	system("leaks -quiet asm");
 	return (0);
 }

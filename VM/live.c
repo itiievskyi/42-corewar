@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 16:13:38 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 16:16:09 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 04:16:54 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void				live(unsigned char *map, t_player *p, t_pc *pc)
 	{
 		if (p->p_id == tmp)
 		{
+			p->pc_id = pc->id;
 			j = 1;
 			p->last_live = p->i;
 			p->p_live++;

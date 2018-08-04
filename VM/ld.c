@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 13:44:26 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 19:33:10 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 02:37:24 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 static void				carry_stand(t_pc *pc, unsigned int tmp)
 {
 	if (tmp == 0)
-	{
-		//printf("in if\n");
-		//printf("pc->arg[0] in if = %u\n", pc->arg[0]);
 		pc->carry = 1;
-	}
 	else
 		pc->carry = 0;
 }
@@ -37,7 +33,6 @@ void					ld(unsigned char *map, t_pc **pc1)
 	{
 		pc->arg[0] = -1;
 		i = red_arg(map, pc, 2);
-		//printf("pc->arg[0] = %u\n", pc->arg[0]);
 		pc->reg[get_map(map, i - 1) - 1] = pc->arg[0];
 		carry_stand(pc, pc->arg[0]);
 	}

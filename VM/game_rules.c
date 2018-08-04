@@ -6,15 +6,15 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:07:55 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 16:51:40 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 03:03:26 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int				count_live(t_player *p, t_pc *pc)
+int					count_live(t_player *p, t_pc *pc)
 {
-	int			res;
+	int				res;
 
 	res = 0;
 	while (pc != NULL)
@@ -27,13 +27,12 @@ int				count_live(t_player *p, t_pc *pc)
 		res += p->p_live;
 		p = p->next;
 	}
-	//printf("res = %d\n", res);
 	return (res);
 }
 
-int				check_cycle(int count, int j, int cycle, t_player *p1)
+int					check_cycle(int count, int j, int cycle, t_player *p1)
 {
-	int			res;
+	int				res;
 
 	res = 0;
 	res += count;
@@ -50,7 +49,7 @@ int				check_cycle(int count, int j, int cycle, t_player *p1)
 	return (j);
 }
 
-void		minus_live(t_pc *pc)
+void				minus_live(t_pc *pc)
 {
 	while (pc != NULL)
 	{
@@ -60,12 +59,8 @@ void		minus_live(t_pc *pc)
 	}
 }
 
-int			delete_one_pc(t_pc **pc)
+int					delete_one_pc(t_pc **pc, t_pc *tmp, t_pc *cur, t_pc *pre)
 {
-	t_pc	*tmp;
-	t_pc	*cur;
-	t_pc	*pre;
-
 	if (*pc && (*pc)->live <= 0)
 	{
 		tmp = (*pc);
@@ -92,10 +87,16 @@ int			delete_one_pc(t_pc **pc)
 	return (0);
 }
 
-void		delete_pc(t_player *p, t_pc **pc_1)
+void				delete_pc(t_player *p, t_pc **pc_1)
 {
-	int		i;
+	int				i;
+	t_pc			*cur;
+	t_pc			*pre;
+	t_pc			*tmp;
 
+	cur = NULL;
+	pre = NULL;
+	tmp = NULL;
 	while (p != NULL)
 	{
 		p->p_live = 0;
@@ -105,7 +106,7 @@ void		delete_pc(t_player *p, t_pc **pc_1)
 	minus_live((*pc_1));
 	while (1)
 	{
-		if (!(delete_one_pc(pc_1)))
-			break;
+		if (!(delete_one_pc(pc_1, tmp, cur, pre)))
+			break ;
 	}
 }

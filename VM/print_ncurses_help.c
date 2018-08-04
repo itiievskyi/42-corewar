@@ -84,4 +84,5 @@ void		print_help(t_ncurse *crwr)
 		ch = '\0';
 	}
 	hide_panel(help_panel);
+	free(help_panel);
 }

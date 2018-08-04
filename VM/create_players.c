@@ -6,13 +6,24 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 13:17:01 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 16:32:57 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 04:52:55 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void			init_pc(t_pc **tmp, unsigned int parent, int stand)
+static void		init_pc2(t_pc *pc, t_rule *r)
+{
+	pc->change = -1;
+	pc->left_live = 0;
+	(r->aff == 1) ? (pc->aff = 1) :
+		(pc->aff = 0);
+	pc->carry = 0;
+	pc->live = 1;
+	pc->id = r->id++;
+}
+
+void			init_pc(t_pc **tmp, unsigned int parent, int stand, t_rule *r)
 {
 	int			i;
 	t_pc		*pc;
@@ -25,9 +36,8 @@ void			init_pc(t_pc **tmp, unsigned int parent, int stand)
 	while (++i < 3)
 		pc->arg[i] = 0;
 	pc->reg[0] = parent;
-	pc->carry = 0;
+	init_pc2(pc, r);
 	pc->parent = parent;
-	pc->live = 1;
 	pc->cicles = 0;
 	pc->command = 0;
 	pc->size = stand;
@@ -71,11 +81,8 @@ t_pc			*create_pc(t_player *p, t_rule *r)
 	while (++j < i)
 	{
 		p->stand = (j * (del / i));
-		init_pc(&pc, p->p_id, ((j * (del / i))));
+		init_pc(&pc, p->p_id, ((j * (del / i))), r);
 		p = p->next;
 	}
-	pc->change = -1;
-	pc->left_live = 0;
-	(r->aff == 1) ? (pc->aff = 1) : (pc->aff = 0);
 	return (pc);
 }

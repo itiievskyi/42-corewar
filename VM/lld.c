@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 13:39:14 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:51:07 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 09:10:43 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void					lld(unsigned char *map, t_pc **pc1)
 			pc->reg[get_map(map, i - 1) - 1] = pc->arg[0];
 			(pc->arg[0] == 0) ? (pc->carry = 1)
 				: (pc->carry = 0);
-        }
-        else
-            pc->reg[get_map(map, i - 1) - 1] = lld_helper(map, pc);
+		}
+		else
+			pc->reg[get_map(map, i - 1) - 1] = lld_helper(map, pc);
 	}
 	pc->size += size_tmp;
 	pc->command = 0;

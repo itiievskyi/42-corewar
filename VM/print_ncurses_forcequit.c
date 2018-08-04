@@ -83,5 +83,6 @@ void		sighandler(int signum)
 		ch = '\0';
 	}
 	hide_panel(quit_panel);
+	free(quit_panel);
 	cbreak();
 }

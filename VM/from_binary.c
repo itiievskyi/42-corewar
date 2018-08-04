@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 13:04:43 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:34:11 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 02:59:47 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			set_bit(t_pc *pc, int plc, unsigned char *map, unsigned int n)
 int				find_weight(int arg, int cmd)
 {
 	if (arg == 3)
-		return (op_tab[cmd].label);
+		return (g_tab[cmd].label);
 	if (arg == 2)
 		return (2);
 	if (arg == 1)

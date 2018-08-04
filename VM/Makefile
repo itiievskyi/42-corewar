@@ -21,7 +21,7 @@ SRC = add.c aff.c and.c bit_mask.c check_codage_patern2.c \
 	  print_ncurses_field.c print_ncurses_finish.c print_ncurses_forcequit.c \
 	  print_ncurses_help.c print_ncurses_highlights.c \
 	  print_ncurses_template.c print_ncurses_utils.c reader.c solver.c \
-	  st.c sti.c sub.c vm_main.c xor.c zjmp.c or.c
+	  st.c sti.c sub.c vm_main.c xor.c zjmp.c or.c help_main.c
 
 FLAGS = -Wall -Werror -Wextra
 

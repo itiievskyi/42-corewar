@@ -6,13 +6,13 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 18:07:51 by averemiy          #+#    #+#             */
-/*   Updated: 2018/07/31 17:03:19 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 03:05:49 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		sub(unsigned char *map, t_pc **pc1)
+void				sub(unsigned char *map, t_pc **pc1)
 {
 	int				tmp1;
 	int				tmp2;
@@ -33,10 +33,8 @@ void		sub(unsigned char *map, t_pc **pc1)
 		{
 			tmp4 = pc->reg[tmp1 - 1] - pc->reg[tmp2 - 1];
 			pc->reg[tmp3 - 1] = tmp4;
-			if (tmp4 == 0)
-				pc->carry = 1;
-			else
-				pc->carry = 0;
+			(tmp4 == 0) ? (pc->carry = 1) :
+				(pc->carry = 0);
 		}
 	}
 	pc->size += get_size(map, pc->command, pc->size);

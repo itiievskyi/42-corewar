@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 15:08:42 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 19:12:05 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 02:33:45 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void		add(unsigned char *map, t_pc **pc1)
 		{
 			tmp4 = pc->reg[tmp1 - 1] + pc->reg[tmp2 - 1];
 			pc->reg[tmp3 - 1] = tmp4;
-			//change carry on ternar
-			(tmp4 == 0) ? (pc->carry = 1) : (pc->carry = 0);
+			(tmp4 == 0) ? (pc->carry = 1) :
+				(pc->carry = 0);
 		}
 	}
 	pc->size += get_size(map, pc->command, pc->size);

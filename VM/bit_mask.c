@@ -6,20 +6,21 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 10:53:59 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 16:53:54 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 03:18:13 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int			bit_mask(int stand, int size)
+int				bit_mask(int stand, int size)
 {
-	int		bit_mask;
-	
+	int			bit_mask;
+
 	if (stand == 1)
 		bit_mask = 192;
 	else
-		(stand == 2) ? (bit_mask = 48) : (bit_mask = 12);
+		(stand == 2) ? (bit_mask = 48)
+			: (bit_mask = 12);
 	if ((size & bit_mask) == (bit_mask - (bit_mask / 3)))
 		return (3);
 	if ((size & bit_mask) == bit_mask)
@@ -36,7 +37,7 @@ static int		jumper(int tmp, unsigned char *map, t_pc *pc)
 	if (tmp == 2)
 		return (2);
 	if (tmp == 3)
-		return (op_tab[get_map(map, pc->size)].label);
+		return (g_tab[get_map(map, pc->size)].label);
 	return (0);
 }
 
@@ -58,9 +59,11 @@ int				red_arg(unsigned char *map, t_pc *pc, int size)
 			pc->arg[i] = pc->reg[get_map(map, jump) - 1];
 		}
 		else if (tmp == 2)
-			pc->arg[i] = take_arg(map, 4, pc->size + (((short)(take_arg(map, 2, jump))) % IDX_MOD));
+			pc->arg[i] = take_arg(map, 4, \
+					pc->size + (((short)(take_arg(map, 2, jump))) % IDX_MOD));
 		else if (tmp == 3)
-			pc->arg[i] = take_arg(map, op_tab[get_map(map, pc->size)].label, jump);
+			pc->arg[i] = take_arg(map, \
+					g_tab[get_map(map, pc->size)].label, jump);
 		jump += jumper(tmp, map, pc);
 	}
 	return (jump);

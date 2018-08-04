@@ -6,16 +6,16 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 16:13:20 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 16:43:11 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 03:16:40 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		zjmp(unsigned char *map, t_pc **pc1)
+void			zjmp(unsigned char *map, t_pc **pc1)
 {
-	int tmp3;
-	t_pc *pc;
+	int			tmp3;
+	t_pc		*pc;
 
 	pc = (*pc1);
 	tmp3 = 0;

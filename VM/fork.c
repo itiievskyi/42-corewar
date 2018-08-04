@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 17:23:12 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/03 16:28:53 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 04:04:55 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		fork_1(unsigned char *map, t_pc *pc, t_pc **main)
 	i = (((short)take_arg(map, 2, pc->size + 1)) % IDX_MOD);
 	new_pc = (t_pc *)malloc(sizeof(t_pc));
 	copy_pc(new_pc, pc, i + pc->size, map);
+	new_pc->id = (*main)->id + 1;
 	new_pc->next = *main;
 	*main = new_pc;
 }

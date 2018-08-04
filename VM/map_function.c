@@ -6,13 +6,13 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 16:24:58 by averemiy          #+#    #+#             */
-/*   Updated: 2018/08/01 18:53:39 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 06:10:27 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int				get_map(unsigned char *map, int coord)
+int					get_map(unsigned char *map, int coord)
 {
 	if (coord < 0)
 		return (get_map(map, 4096 + coord));
@@ -21,7 +21,7 @@ int				get_map(unsigned char *map, int coord)
 	return (map[coord]);
 }
 
-int				yes(t_pc *pc, int i)
+int					yes(t_pc *pc, int i)
 {
 	while (pc != NULL)
 	{
@@ -32,7 +32,8 @@ int				yes(t_pc *pc, int i)
 	return (0);
 }
 
-void	print_map(unsigned char *map, t_pc *pc, t_player *p, t_rule *r)
+void				print_map(unsigned char *map, t_pc *pc,\
+		t_player *p, t_rule *r)
 {
 	int				i;
 	static t_ncurse	*crwr;
@@ -61,21 +62,29 @@ void	print_map(unsigned char *map, t_pc *pc, t_player *p, t_rule *r)
 	print_ncurses(crwr, pc);
 }
 
-void			put_in_map(t_player *p, unsigned char *map)
+void				put_in_map(t_player *p, unsigned char *map, t_rule *rule)
 {
-	int			i;
-	int			k;
+	int				i;
+	int				k;
+	t_player		*p1;
 
+	p1 = p;
+	if (rule->visual == 0 && (i = 1) == 1)
+	{
+			ft_printf("Introducting contestants ...\n");
+		while (p1 != NULL)
+		{
+			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", \
+					i++, p1->p_size, p1->p_name, p1->p_comment);
+			p1 = p1->next;
+		}
+	}
 	while (p != NULL)
 	{
-		i = 0;
+		i = -1;
 		k = p->stand;
-		while (i < p->p_size)
-		{
-			map[k] = p->p_code[i];
-			i++;
-			k++;
-		}
+		while (++i < p->p_size)
+			map[k++] = p->p_code[i];
 		p = p->next;
 	}
 }

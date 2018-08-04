@@ -6,7 +6,7 @@
 /*   By: averemiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 13:29:39 by averemiy          #+#    #+#             */
-/*   Updated: 2018/07/30 13:53:54 by averemiy         ###   ########.fr       */
+/*   Updated: 2018/08/04 03:04:06 by averemiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void		or(unsigned char *map, t_pc **pc1)
 			pc->carry = 0;
 	}
 	pc->size += get_size(map, pc->command, pc->size);
-	pc->command  = 0;
+	pc->command = 0;
 }
