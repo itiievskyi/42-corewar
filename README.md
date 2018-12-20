@@ -11,15 +11,16 @@ Obviously, the virtual machine should allow for numerous simultaneous processes.
 * **The champion**: It's necessary to create a simple champion just to prove the program functionality.
 
 ### How to run:
-git clonehttps://github.com/itiievskyi/42-corewar.git ~/corewar/
-cd ~/corewar/
-make
-./asm [file.s] (use *Leha.s*)
-./corewar [-v | -dump N] [-a] [-n N] <champion1.cor> <...>
-       -v	: Enables visualization
-       -dump N	: Dumps memory after N cycles
-       -a	: Prints output from 'aff' (Default is to hide it)
-       -n N	: Assigns id N to the player specified right after N
+* git clonehttps://github.com/itiievskyi/42-corewar.git ~/corewar/
+* cd ~/corewar/
+* make
+* ./asm [file.s] (use *Leha.s*)
+* ./corewar [-v | -dump N] [-a] [-n N] <champion1.cor> <...>
+  * -v	       : Enables visualization
+  * -dump N	: Dumps memory after N cycles
+  * -a	       : Prints output from 'aff' (Default is to hide it)
+  * -n N	: Assigns id N to the player specified right after N
+
 *Pay attention! [-v] has higher priority when is used with [-dump]*
 
 ### Visualization
