@@ -11,7 +11,7 @@ Obviously, the virtual machine should allow for numerous simultaneous processes.
 * **The champion**: It's necessary to create a simple champion just to prove the program functionality.
 
 ### How to run:
-* git clonehttps://github.com/itiievskyi/42-corewar.git ~/corewar/
+* git clone https://github.com/itiievskyi/42-corewar.git ~/corewar/
 * cd ~/corewar/
 * make
 * ./asm [file.s] (use *Leha.s*)
